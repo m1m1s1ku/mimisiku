@@ -131,6 +131,10 @@ button, a { cursor: pointer; }
   justify-content: flex-end;
 }
 
+.back-home {
+  margin-top: 16px;
+}
+
 .app-container {
   width: 100%;
   display: flex;
@@ -243,9 +247,9 @@ footer {
   justify-content: flex-end;
   color: white;
 
-  &.mimi-home {
+  /*&.mimi-home {
     margin-top: -10%;
-  }
+  }*/
 
   a {
     color: white;
