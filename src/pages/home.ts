@@ -126,7 +126,7 @@ export class HomeController extends Page {
 
           <section class="service">
             <h2>Networking</h2>
-            <p>We have designed and launched communities, infrastructure at scale.</p>
+            <p>We have enabled the growth of large successful communities.</p>
             <ul>
               <li>Private networks</li>
               <li>Offshore hosting</li>
