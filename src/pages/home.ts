@@ -139,7 +139,10 @@ export class HomeController extends Page {
           </section>
         </section>
 
-        <div>
+        <div class="links">
+          <a href="https://status.uplg.xyz/status/mimisiku" target="_blank">
+          // Network status.
+          </a>
           <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
           // Lab.
           </a>

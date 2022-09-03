@@ -257,6 +257,12 @@ footer {
   }
 }
 
+.links {
+  display: flex;
+  flex-direction: row;
+  gap: 26px;
+}
+
 .service {
   user-select: none;
   h2 {
