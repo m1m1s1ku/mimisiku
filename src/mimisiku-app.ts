@@ -19,6 +19,8 @@ export class MimisikuApp extends Root {
 
 	public routing: Promise<void>;
 
+	public randomColors!: () => void;
+
 	public get loadables(): string[] {
 		return [];
 	}
@@ -39,7 +41,17 @@ export class MimisikuApp extends Root {
 		this.routing = import('./pages').then(() => {
 			return this.firstLoad(path);
 		}).then(() => {
-			create();
+			const toolbox = create();
+			if(!toolbox) { return; }
+
+			this.randomColors = () => {
+				toolbox.palette.setColors();
+				toolbox.palette.setCustomProperties();
+			
+				toolbox.orbs.forEach((orb) => {
+					orb.fill = parseInt(toolbox.palette.randomColor(), 16);
+				});
+			};
 		});
 	}
 

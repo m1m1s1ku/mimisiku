@@ -14,7 +14,7 @@ function map(n: number, start1:number, end1:number, start2:number, end2:number) 
 
 const noise2D = createNoise2D();
 
-class ColorPalette {
+export class ColorPalette {
   hue: number | null = null;
   complimentaryHue1: number | null = null;
   complimentaryHue2: number | null = null;
@@ -77,7 +77,7 @@ class ColorPalette {
     );
   }
 }
-class Orb {
+export class Orb {
   bounds: { x: { min: number; max: number; }; y: { min: number; max: number; }; };
   x: number;
   y: number;
@@ -166,9 +166,9 @@ class Orb {
   }
 }
 
-export function create() {
+export function create(): { palette: ColorPalette, orbs: Orb[] } | null {
     const canvas = document.querySelector<HTMLCanvasElement>('canvas.background-canvas');
-    if(!canvas) { return; }
+    if(!canvas) { return null; }
 
     const app = new Application({
         view: canvas,
@@ -207,7 +207,7 @@ export function create() {
     });
   }
 
-  const btnColors = document.querySelector('.overlay__btn--colors');
+  /* const btnColors = document.querySelector('.random-background');
   btnColors?.addEventListener('click', () => {
       colorPalette.setColors();
       colorPalette.setCustomProperties();
@@ -215,5 +215,10 @@ export function create() {
       orbs.forEach((orb) => {
         orb.fill = parseInt(colorPalette.randomColor(), 16);
       });
-  });
+  });*/
+
+  return { 
+    palette: colorPalette, 
+    orbs 
+  };
 }

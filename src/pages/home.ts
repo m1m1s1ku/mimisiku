@@ -148,6 +148,7 @@ export class HomeController extends Page {
           <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
           // Lab.
           </a>
+          <span @click=${() => Mimisiku()?.randomColors()}>🎨</span>
         </div>
 
         <div id="hero-container">

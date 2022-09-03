@@ -232,7 +232,13 @@ footer {
 .links {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 26px;
+  user-select: none;
+
+  span {
+    cursor: pointer;
+  }
 }
 
 .service {
