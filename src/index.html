@@ -24,7 +24,7 @@
     <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.6.0/webcomponents-loader.js"></script>
     <script id="boot">
         document.addEventListener('DOMContentLoaded', async function() {
-          const AppConstructor = await customElements.whenDefined('mimisiku-app');
+          let AppConstructor = await customElements.whenDefined('mimisiku-app');
 
           if(!AppConstructor){
             AppConstructor = customElements.get('mimisiku-app');
