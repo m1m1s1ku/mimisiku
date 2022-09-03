@@ -76,8 +76,8 @@ export class MimisikuApp extends Root {
 			<div class="app-container">
 				${this.appHeader}
 				<div class="app-content">
-					<canvas class="background-canvas"></canvas>
 					<div class="content-section" id="content"></div>
+					<canvas class="background-canvas"></canvas>
 				</div>
 			</div>
 		</div>`;

@@ -23,7 +23,7 @@
   body {
     --app-container: #1f1d2b;
     --app-container: #111827;
-    --main-color: #fff;
+    --main-color: #333;
     --secondary-color: rgba(255, 255, 255, 0.8);
     --content-section: #1f2937;
     --link-color: rgba(255, 255, 255, 0.8);
@@ -224,6 +224,13 @@ button, a { cursor: pointer; }
   color: var(--main-color);
 }
 
+.hero {
+  h1 {
+    margin: 24px 0;
+  }
+  margin-bottom: 48px;
+}
+
 .wip a {
   margin-top: 48px;
 }
@@ -248,7 +255,7 @@ footer {
 .service {
   user-select: none;
   h2 {
-    margin: 38px 0;
+    margin: 10px 0;
   }
   a {
     display: flex;
@@ -259,7 +266,9 @@ footer {
 }
 
 #hero-container {
-	position: relative;
+	position: absolute;
+  left: 60%;
+  bottom: 135px;
 	filter: url(#threshold) blur(0.6px);
 }
 
@@ -279,6 +288,7 @@ footer {
 .background-canvas {
   position: fixed;
   top: 0;
+  bottom: 50px;
   left: 0;
   width: 100%;
   height: 100%;

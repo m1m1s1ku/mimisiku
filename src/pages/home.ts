@@ -103,6 +103,9 @@ export class HomeController extends Page {
     
     return html`
       <div id="page" class="page" role="main">
+        <section class="hero">
+          <h1>We're passionate about building and creating things in a self-motivated and self-directed way.</h1>
+        </section>
         <section class="service">
           <h2>Development</h2>
           <ul>
