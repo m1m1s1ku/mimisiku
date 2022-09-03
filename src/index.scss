@@ -121,6 +121,19 @@ a {
 h3, h4 { user-select: none; color: var(--main-color); }
 button, a { cursor: pointer; }
 
+.flex-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center
+}
+
+.justify-center {
+  justify-content: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+
 .app-container {
   width: 100%;
   display: flex;
@@ -211,11 +224,20 @@ button, a { cursor: pointer; }
   color: var(--main-color);
 }
 
+.wip a {
+  margin-top: 48px;
+}
+
 footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   color: white;
+
+  margin-top: 5em;
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
 
   a {
     color: white;
@@ -231,6 +253,23 @@ footer {
     justify-content: center;
     padding-bottom: 48px;
   }
+}
+
+#hero-container {
+	position: relative;
+	filter: url(#threshold) blur(0.6px);
+}
+
+#textA, #textB {
+	position: absolute;
+	width: 100%;
+	display: inline-block;
+	
+	font-size: 48px;
+	text-align: right;
+	user-select: none;
+	
+	color: white;
 }
 
 /* Home */

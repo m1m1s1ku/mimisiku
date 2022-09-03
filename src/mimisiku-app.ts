@@ -83,7 +83,7 @@ export class MimisikuApp extends Root {
 		</div>`;
 	}
 
-	private preventAndNavigate(e: Event, page: Pages): void {
+	public navigateTo(e: Event, page: Pages): void {
 		e.preventDefault();
 		this.redirect(page);
 	}
@@ -92,7 +92,7 @@ export class MimisikuApp extends Root {
 		return html`
 		<div class="app-header">
 			<div class="app-header-left">
-				<p class="app-name text-gradient"><a href="home" @click=${(e: Event) => this.preventAndNavigate(e, Pages.home)}>// Mimisiku.</a></p>
+				<p class="app-name text-gradient"><a href="home" @click=${(e: Event) => this.navigateTo(e, Pages.home)}>// Mimisiku.</a></p>
 			</div>
 		</div>`;
 	}
