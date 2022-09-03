@@ -113,8 +113,8 @@ export class HomeController extends Page {
             <p>We share insights and expertise gained from spinning multiple successful projects.</p>
             <ul>
               <li>Custom solutions using state of the art technologies</li>
-              <li>Tracking solutions (DLT)</li>
-              <li>Decentralization</li>
+              <li>Decentralization (DLT)</li>
+              <li>Tracking solutions</li>
               <li>OpenID</li>
               <li>IoT</li>
             </ul>
