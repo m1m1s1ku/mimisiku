@@ -139,6 +139,12 @@ export class HomeController extends Page {
           </section>
         </section>
 
+        <div>
+          <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
+          // Blog
+          </a>
+        </div>
+
         <div id="hero-container">
           <span id="textA"></span>
           <span id="textB"></span>
