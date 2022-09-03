@@ -15,6 +15,16 @@ export class ProjectsController extends Page {
 
   private projects = [
     {
+        name: 'Google Authenticator Export',
+        slug: 'ga-export',
+        description: 'Export every secret easily from Google Authenticator (Authy in another repo too.).',
+        image: '/assets/projects/ga.svg',
+        repository: 'https://github.com/m1m1s1ku/gauth-export',
+        status: 'published',
+        url: 'https://ga.mimisiku.dev',
+        tags: ['OTPAuth', 'Material'],
+    },
+    {
         logo: MaiaLogo,
         name: 'Maia',
         slug: 'maia',
@@ -36,16 +46,6 @@ export class ProjectsController extends Page {
         tags: ['NodeJS', 'Telegram', 'Bot', 'OPML', 'RSS'],
     },
     {
-        name: 'Google Authenticator Export',
-        slug: 'ga-export',
-        description: 'Export every secret easily from Google Authenticator (Authy in another repo too.).',
-        image: '/assets/projects/ga.svg',
-        repository: 'https://github.com/m1m1s1ku/gauth-export',
-        status: 'published',
-        url: 'https://ga.mimisiku.dev',
-        tags: ['OTPAuth', 'Material'],
-    },
-    {
         name: 'BricksSDK',
         slug: 'bricks-sdk',
         description: 'An SDK to access Bricks.co',
@@ -56,16 +56,6 @@ export class ProjectsController extends Page {
         tags: ['NodeJS', 'Typescript', 'Zod', 'Undici'],
     },
     {
-        name: 'Thiweb',
-        slug: 'thiweb',
-        description: 'Community.',
-        image: '/assets/projects/thiweb.svg',
-        repository: null,
-        status: 'published',
-        url: 'https://forum.thiweb.com',
-        tags: ['Community', 'PhpBB'],
-    },
-    {
         name: 'Persin Conseil',
         slug: 'persin',
         description: 'IT consulting and services',
@@ -74,16 +64,7 @@ export class ProjectsController extends Page {
         url: 'https://www.persin.fr',
         tags: [ 'Lit', 'Offline ready', 'no-js handling' ],
     },
-    {
-        name: 'Talis Protocol',
-        slug: 'talis-art',
-        description: 'NFT Marketplace and much more.',
-        image: '/assets/projects/talis.svg',
-        status: 'published',
-        repository: null,
-        url: 'https://talis.art',
-        tags: [ 'Next.JS', 'RxJS', 'Rust' ],
-    },
+
     {
         name: 'Cheno',
         slug: 'cheno',
@@ -103,7 +84,27 @@ export class ProjectsController extends Page {
         repository: 'https://github.com/ghostfly/dobrunia-design',
         url: 'https://www.dobruniadesign.com',
         tags: [ 'Lit', 'GraphQL', 'Wordpress' ],
-    }
+    },
+    {
+        name: 'Thiweb',
+        slug: 'thiweb',
+        description: 'Community.',
+        image: '/assets/projects/thiweb.svg',
+        repository: null,
+        status: 'published',
+        url: 'https://forum.thiweb.com',
+        tags: ['PhpBB'],
+    },
+    {
+        name: 'Talis Protocol',
+        slug: 'talis-art',
+        description: 'NFT Marketplace and much more.',
+        image: '/assets/projects/talis.svg',
+        status: 'published',
+        repository: null,
+        url: 'https://talis.art',
+        tags: [ 'Next.JS', 'RxJS', 'Rust' ],
+    },
   ];
 
   public render(): void | TemplateResult {
@@ -117,9 +118,10 @@ export class ProjectsController extends Page {
         ${repeat(this.projects, (project) => project.slug, (project) => html`
         <div class="project">
             <a href=${project.url}>${project.name}</a>
-            <div>
+            <div class="excerpt">
                 <p>${project.description}</p>
-                <ul>${map(project.tags, (tag) => html`<li>${tag}</li>`)}</ul>
+                <!-- <p class="tags">${map(project.tags, (tag) => html`<span class="tag">${tag}</span>`)}</p> -->
+                ${when(project.repository, () => html`<a href="${project.repository}">Repository</a>`)}
             </div>
         </div>
         `)}
