@@ -110,6 +110,7 @@ export class HomeController extends Page {
         <section class="areas">
           <section class="service">
             <h2>Development</h2>
+            <p>We guide every step, from mechanism design to project launch.</p>
             <ul>
               <li>Custom solutions using state of the art technologies</li>
               <li>Tracking solutions (DLT)</li>
@@ -125,6 +126,7 @@ export class HomeController extends Page {
 
           <section class="service">
             <h2>Networking</h2>
+            <p>We have designed and launched communities, infrastructure at scale.</p>
             <ul>
               <li>Private networks</li>
               <li>Offshore hosting</li>
