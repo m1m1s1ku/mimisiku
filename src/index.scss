@@ -231,6 +231,12 @@ button, a { cursor: pointer; }
   margin-bottom: 48px;
 }
 
+.areas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+}
+
 .wip a {
   margin-top: 48px;
 }
@@ -242,9 +248,6 @@ footer {
   color: white;
 
   margin-top: 5em;
-  position: absolute;
-  bottom: 25px;
-  right: 25px;
 
   a {
     color: white;
@@ -258,6 +261,7 @@ footer {
     margin: 10px 0;
   }
   a {
+    mix-blend-mode: revert;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -266,9 +270,6 @@ footer {
 }
 
 #hero-container {
-	position: absolute;
-  left: 60%;
-  bottom: 135px;
 	filter: url(#threshold) blur(0.6px);
 }
 
@@ -325,6 +326,12 @@ strong {
   }
 }
 
+@media screen and (max-width: 450px) {
+  .areas {
+    display: inline-block;
+  }
+}
+
 @media screen and (max-width: 520px) {
   .app-sidebar {
     padding: 4px 0px;
@@ -348,6 +355,10 @@ strong {
 
   .content-section-header p {
     font-size: 18px;
+  }
+
+  .areas {
+    gap: 50px;
   }
 }
 

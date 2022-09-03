@@ -106,35 +106,40 @@ export class HomeController extends Page {
         <section class="hero">
           <h1>We're passionate about building and creating things in a self-motivated and self-directed way.</h1>
         </section>
-        <section class="service">
-          <h2>Development</h2>
-          <ul>
-            <li>Custom solutions using state of the art technologies</li>
-            <li>Decentralized technologies</li>
-            <li>Tracking solutions</li>
-            <li>OpenID</li>
-            <li>IoT</li>
-          </ul>
-          <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
-            Projects
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </a>
+
+        <section class="areas">
+          <section class="service">
+            <h2>Development</h2>
+            <ul>
+              <li>Custom solutions using state of the art technologies</li>
+              <li>Decentralized technologies</li>
+              <li>Tracking solutions</li>
+              <li>OpenID</li>
+              <li>IoT</li>
+            </ul>
+            <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
+              Projects
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </section>
+
+          <section class="service">
+            <h2>Networking</h2>
+            <ul>
+              <li>Private networks</li>
+              <li>Offshore hosting</li>
+              <li>Monitoring</li>
+              <li>Security</li>
+              <li>Support</li>
+            </ul>
+            <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
+              Cases
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </section>
         </section>
 
-        <section class="service">
-          <h2>Networking</h2>
-          <ul>
-            <li>Private networks</li>
-            <li>Offshore hosting</li>
-            <li>Monitoring</li>
-            <li>Security</li>
-            <li>Support</li>
-          </ul>
-          <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
-            Cases
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </a>
-        </section>
+
 
         <div id="hero-container">
           <span id="textA"></span>
