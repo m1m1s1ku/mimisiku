@@ -25,6 +25,7 @@ export class MimisikuApp extends Root {
 		return [
 			'ui-not-found',
 			'ui-home',
+			'ui-wip',
 		];
 	}
 
