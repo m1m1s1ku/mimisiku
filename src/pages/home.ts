@@ -106,7 +106,7 @@ export class HomeController extends Page {
         <section class="service">
           <h2>Development</h2>
           <ul>
-            <li>Custom development using state of the art technologies</li>
+            <li>Custom solutions using state of the art technologies</li>
             <li>Decentralized technologies</li>
             <li>Tracking solutions</li>
             <li>OpenID</li>
