@@ -247,9 +247,9 @@ footer {
   justify-content: flex-end;
   color: white;
 
-  /*&.mimi-home {
-    margin-top: -10%;
-  }*/
+  &.mimi-home {
+    display: none;
+  }
 
   a {
     color: white;
