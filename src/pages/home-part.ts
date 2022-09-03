@@ -1,4 +1,4 @@
-import * as PIXI from 'pixi.js';
+import { Application, Graphics } from 'pixi.js';
 import { KawaseBlurFilter } from '@pixi/filter-kawase-blur';
 import { createNoise2D } from 'simplex-noise';
 import hsl from 'hsl-to-hex';
@@ -98,7 +98,7 @@ class Orb {
   xOff: number;
   yOff: number;
   inc: number;
-  graphics: PIXI.Graphics;
+  graphics: Graphics;
   // Pixi takes hex colors as hexidecimal literals (0x rather than a string with '#')
   constructor(fill = 0x000000) {
     // bounds = the area an orb is "allowed" to move within
@@ -123,7 +123,7 @@ class Orb {
     this.inc = 0.002;
 
     // PIXI.Graphics is used to draw 2d primitives (in this case a circle) to the canvas
-    this.graphics = new PIXI.Graphics();
+    this.graphics = new Graphics();
     this.graphics.alpha = 0.825;
 
     // 250ms after the last window resize event, recalculate orb positions.
@@ -198,7 +198,7 @@ export function create() {
     const canvas = document.querySelector<HTMLCanvasElement>('canvas.background-canvas');
     if(!canvas) { return; }
 
-    const app = new PIXI.Application({
+    const app = new Application({
         // render to <canvas class="background-canvas"></canvas>
         view: canvas,
         // auto adjust size to fit the current window
