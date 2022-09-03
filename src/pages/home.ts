@@ -19,9 +19,9 @@ export class HomeController extends Page {
     };
 
     const texts = [
+      'Authenticity',
       'Secrecy',
       'Integrity',
-      'Authenticity'
     ];
 
     const morphTime = 3;
