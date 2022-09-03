@@ -108,7 +108,8 @@ export class HomeController extends Page {
           <ul>
             <li>Custom development using state of the art technologies</li>
             <li>Decentralized technologies</li>
-            <li>Open Source</li>
+            <li>Tracking solutions</li>
+            <li>OpenID</li>
             <li>IoT</li>
           </ul>
           <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
@@ -123,6 +124,8 @@ export class HomeController extends Page {
             <li>Private networks</li>
             <li>Offshore hosting</li>
             <li>Monitoring</li>
+            <li>Security</li>
+            <li>Support</li>
           </ul>
           <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
             Cases
