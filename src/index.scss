@@ -80,7 +80,6 @@ body {
   background: var(--bg-gradient);
 
   font-family: var(--mimisiku-font-primary);
-  overflow: hidden;
   justify-content: center;
   background-color: var(--app-container);
 
@@ -313,6 +312,13 @@ strong {
   -moz-text-fill-color: transparent;
 }
 
+.projects {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  padding: 10px;
+}
+
 /* Not too many browser support this yet but it's good to add! */
 @media (prefers-contrast: high) {
   .background-canvas {
@@ -322,7 +328,9 @@ strong {
 
 @media only screen and (min-width: 840px) {
   .page {
-    margin-top: 10%;
+    &.home {
+      margin-top: 10%;
+    }
   }
 
   .service {
@@ -334,12 +342,11 @@ strong {
   body {
     padding: 1.5rem;
   }
-
 }
 
-@media screen and (max-width: 450px) {
-  .areas {
-    display: inline-block;
+@media screen and (max-width: 565px) {
+  .projects {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -370,6 +377,16 @@ strong {
 
   .areas {
     gap: 50px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .projects {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  
+  .areas {
+    display: inline-block;
   }
 }
 

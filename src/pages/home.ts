@@ -102,7 +102,7 @@ export class HomeController extends Page {
   public render(): void | TemplateResult {
     
     return html`
-      <div id="page" class="page" role="main">
+      <div id="page" class="page home" role="main">
         <section class="hero">
           <h1>We're passionate about building and creating things in a self-motivated and self-directed way.</h1>
         </section>
