@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mimisiku.</title>
+    <!--
+    @todo
+    <meta name="description" content="">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= htmlWebpackPlugin.options.pathname %>/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="<%= htmlWebpackPlugin.options.pathname %>/assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="<%= htmlWebpackPlugin.options.pathname %>/assets/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.options.pathname %>/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.options.pathname %>/assets/favicon-16x16.png">
+    <link rel="manifest" href="<%= htmlWebpackPlugin.options.pathname %>/assets/site.webmanifest">
+    <link rel="shortcut icon" href="<%= htmlWebpackPlugin.options.pathname %>/favicon.ico">
+    
+    -->
+    <base href="/">
+
+    <noscript>JavaScript is needed to use this website.</noscript>
+    <script id="boot">
+        document.addEventListener('DOMContentLoaded', async function() {
+          const AppConstructor = await customElements.whenDefined('mimisiku-app');
+        
+          const app = new AppConstructor(location.pathname);
+          app.showLoader();
+
+          await Promise.all([
+            document.fonts.ready,
+            ...app.needed.map(needed => customElements.whenDefined(needed)), // Sub-components
+            app.bootstrap,  // Load components promises
+            app.routing,    // First-load (pathname handling)
+            app.showTime(), // Append <mimisiku-app> into <body>
+          ]);
+
+          const scriptTag = document.getElementById('boot');
+          scriptTag.parentElement.removeChild(scriptTag);
+        });
+    </script>
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+  </head>
+  <body></body>
+</html>
