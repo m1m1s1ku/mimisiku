@@ -269,6 +269,10 @@ footer {
   }
 }
 
+#filters {
+  display: contents;
+}
+
 #hero-container {
 	filter: url(#threshold) blur(0.6px);
 }
@@ -320,10 +324,21 @@ strong {
   }
 }
 
+@media only screen and (min-width: 840px) {
+  .page {
+    margin-top: 10%;
+  }
+  
+  .service {
+    margin-bottom: 100px;
+  }
+}
+
 @media only screen and (max-width: 840px) {
   body {
     padding: 1.5rem;
   }
+
 }
 
 @media screen and (max-width: 450px) {
