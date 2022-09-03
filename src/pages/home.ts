@@ -104,7 +104,7 @@ export class HomeController extends Page {
     return html`
       <div id="page" class="page home" role="main">
         <section class="hero">
-          <h1>We're passionate about building and creating things in a self-motivated and self-directed way.</h1>
+          <h1>Passionately building and creating, bringing the future to the present.</h1>
         </section>
 
         <section class="areas">
@@ -112,8 +112,8 @@ export class HomeController extends Page {
             <h2>Development</h2>
             <ul>
               <li>Custom solutions using state of the art technologies</li>
-              <li>Decentralized technologies</li>
-              <li>Tracking solutions</li>
+              <li>Tracking solutions (DLT)</li>
+              <li>Decentralization</li>
               <li>OpenID</li>
               <li>IoT</li>
             </ul>
