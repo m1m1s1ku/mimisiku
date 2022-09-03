@@ -105,7 +105,7 @@ export class MimisikuApp extends Root {
 	}
 
 	public showLoader(): void {
-		render(html`<div id="loader" class="loader"><div class="handler-content"><div id="spinner" class="spinner large">//Mimisiku.</div></div></div>`, document.body, { host: this });
+		render(html`<div id="loader" class="loader"><div class="handler-content"><div id="spinner" class="spinner large"></div></div></div>`, document.body, { host: this });
 	}
 
 	public async showTime(): Promise<void> {
