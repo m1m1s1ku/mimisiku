@@ -231,7 +231,6 @@ button, a { cursor: pointer; }
 .areas {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 100px;
 }
 
 .wip a {
@@ -244,7 +243,9 @@ footer {
   justify-content: flex-end;
   color: white;
 
-  margin-top: 5em;
+  &.mimi-home {
+    margin-top: -10%;
+  }
 
   a {
     color: white;

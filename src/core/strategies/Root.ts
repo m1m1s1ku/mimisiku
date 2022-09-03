@@ -63,6 +63,7 @@ export default abstract class Root extends LitElement {
 		}
 
 		history.pushState(null, '', route);
+		this.route = route;
 
 		return load(route, this._content);
 	}

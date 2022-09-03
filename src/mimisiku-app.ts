@@ -83,7 +83,7 @@ export class MimisikuApp extends Root {
 					<div class="content-section" id="content"></div>
 					<canvas class="background-canvas"></canvas>
 				</div>
-				<footer>
+				<footer class="footer mimi-${this.route}">
 					&copy; Mimisiku. | ${new Date().getFullYear()} | <a href="https://github.com/m1m1s1ku">GitHub</a>
 				</footer>
 			</div>
