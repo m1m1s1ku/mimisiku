@@ -247,6 +247,9 @@ footer {
 
 .service {
   user-select: none;
+  h2 {
+    margin: 38px 0;
+  }
   a {
     display: flex;
     align-items: center;
