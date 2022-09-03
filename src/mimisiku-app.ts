@@ -8,9 +8,9 @@ import Root from './core/strategies/Root';
 export enum Pages {
 	root = '',
 	home = 'home',
+	wip = 'wip',
 	notFound = 'not-found'
 }
-
 @customElement('mimisiku-app')
 export class MimisikuApp extends Root {
 	public static readonly is: string = 'mimisiku-app';
@@ -49,9 +49,10 @@ export class MimisikuApp extends Root {
 
 		switch(path) {
 			case Pages.root:
-			case Pages.home: {
+			case Pages.home:
 				return await this.load(Pages.home);
-			}
+			case Pages.wip:
+				return await this.load(Pages.wip);
 			default:
 				return await this.load(Pages.notFound);
 		}
