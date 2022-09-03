@@ -124,7 +124,7 @@ export class MimisikuApp extends Root {
 
 				loader.parentElement.removeChild(loader);
 				resolve(undefined);
-			}, duration / 2);
+			}, duration);
 		});
 
 		await fadeOut.finished;
