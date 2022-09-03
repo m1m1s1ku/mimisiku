@@ -6,6 +6,7 @@
   --mimisiku-font-primary: "Kotori Rose", -apple-system, BlinkMacSystemFont,
     “Segoe UI”, Roboto, Helvetica, Arial, sans-serif;
 
+  /* @todo : fix into dark-mode .bg-gradient. */
   --base: hsl(var(--hue), 95%, 50%);
   --complimentary1: hsl(var(--hue-complimentary1), 95%, 50%);
   --complimentary2: hsl(var(--hue-complimentary2), 95%, 50%);
@@ -19,23 +20,8 @@
 
 @media (prefers-color-scheme: dark) {
   body {
-    --app-container: #1f1d2b;
     --app-container: #111827;
     --main-color: #fff;
-    --secondary-color: rgba(255, 255, 255, 0.8);
-    --content-section: #1f2937;
-    --link-color: rgba(255, 255, 255, 0.8);
-    --link-color-hover: rgba(195, 207, 244, 0.1);
-    --link-color-active-bg: rgba(195, 207, 244, 0.2);
-    --button-bg: #1f2937;
-    --search-area-bg: #1f2937;
-    --message-box-hover: #243244;
-    --message-box-border: rgba(255, 255, 255, 0.1);
-    --light-font: rgba(255, 255, 255, 0.8);
-    --more-list-bg: #2f3142;
-    --more-list-bg-hover: rgba(195, 207, 244, 0.1);
-    --more-list-shadow: rgba(195, 207, 244, 0.1);
-    --message-btn: rgba(195, 207, 244, 0.1);
   }
 }
 
@@ -43,20 +29,6 @@
   body {
     --app-container: #FFF;
     --main-color: #1f1c2e;
-    --secondary-color: #4a4a4a;
-    --link-color: #1f1c2e;
-    --link-color-hover: #c3cff4;
-    --link-color-active: #fff;
-    --link-color-active-bg: #1f1c2e;
-    --content-section: #fff;
-    --message-box-hover: #fafcff;
-    --message-box-border: #e9ebf0;
-    --more-list-bg: #fff;
-    --more-list-bg-hover: #f6fbff;
-    --more-list-shadow: rgba(209, 209, 209, 0.4);
-    --button-bg: #1f1c24;
-    --search-area-bg: #fff;
-    --message-btn: #fff;
   }
 }
 
@@ -356,7 +328,6 @@ strong {
   }
 }
 
-/* Not too many browser support this yet but it's good to add! */
 @media (prefers-contrast: high) {
   .background-canvas {
     display: none;
