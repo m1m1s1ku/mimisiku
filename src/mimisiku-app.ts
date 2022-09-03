@@ -4,6 +4,7 @@ import { html, TemplateResult, render } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 
 import Root from './core/strategies/Root';
+import { create } from './pages/home-part';
 
 export enum Pages {
 	root = '',
@@ -36,7 +37,7 @@ export class MimisikuApp extends Root {
 		this.routing = import('./pages').then(() => {
 			return this.firstLoad(path);
 		}).then(() => {
-			// At this point of time, we should be able to do anything with the App.
+			create();
 		});
 	}
 
@@ -75,6 +76,7 @@ export class MimisikuApp extends Root {
 			<div class="app-container">
 				${this.appHeader}
 				<div class="app-content">
+					<canvas class="background-canvas"></canvas>
 					<div class="content-section" id="content"></div>
 				</div>
 			</div>
