@@ -117,7 +117,7 @@ export class HomeController extends Page {
               <li>OpenID</li>
               <li>IoT</li>
             </ul>
-            <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
+            <a href="projects" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.projects)}>
               Projects
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </a>
@@ -139,16 +139,10 @@ export class HomeController extends Page {
           </section>
         </section>
 
-
-
         <div id="hero-container">
           <span id="textA"></span>
           <span id="textB"></span>
         </div>
-
-        <footer>
-          &copy; Mimisiku. | ${new Date().getFullYear()} | <a href="https://github.com/m1m1s1ku">GitHub</a>
-        </footer>
 
         <svg id="filters">
           <defs>

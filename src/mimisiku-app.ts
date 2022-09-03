@@ -10,6 +10,7 @@ export enum Pages {
 	root = '',
 	home = 'home',
 	wip = 'wip',
+	projects = 'projects',
 	notFound = 'not-found'
 }
 @customElement('mimisiku-app')
@@ -26,6 +27,7 @@ export class MimisikuApp extends Root {
 		return [
 			'ui-not-found',
 			'ui-home',
+			'ui-projects',
 			'ui-wip',
 		];
 	}
@@ -54,6 +56,8 @@ export class MimisikuApp extends Root {
 				return await this.load(Pages.home);
 			case Pages.wip:
 				return await this.load(Pages.wip);
+			case Pages.projects:
+				return await this.load(Pages.projects);
 			default:
 				return await this.load(Pages.notFound);
 		}
@@ -79,6 +83,9 @@ export class MimisikuApp extends Root {
 					<div class="content-section" id="content"></div>
 					<canvas class="background-canvas"></canvas>
 				</div>
+				<footer>
+					&copy; Mimisiku. | ${new Date().getFullYear()} | <a href="https://github.com/m1m1s1ku">GitHub</a>
+				</footer>
 			</div>
 		</div>`;
 	}
