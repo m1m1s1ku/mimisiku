@@ -1,18 +1,21 @@
-import { html, TemplateResult } from 'lit';
+import { html, nothing, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { map } from 'lit/directives/map.js';
+import { when } from 'lit/directives/when.js';
 
 import { Mimisiku } from '../core/mimisiku';
 
 import Page from '../core/strategies/Page';
 import { Pages } from '../mimisiku-app';
+import { MaiaLogo } from '../svg';
 
 @customElement('ui-projects')
 export class ProjectsController extends Page {
 
   private projects = [
     {
+        logo: MaiaLogo,
         name: 'Maia',
         slug: 'maia',
         description: 'Financial recipes.',
@@ -114,8 +117,10 @@ export class ProjectsController extends Page {
         ${repeat(this.projects, (project) => project.slug, (project) => html`
         <div class="project">
             <a href=${project.url}>${project.name}</a>
-            <p>${project.description}</p>
-            <ul>${map(project.tags, (tag) => html`<li>${tag}</li>`)}</ul>
+            <div>
+                <p>${project.description}</p>
+                <ul>${map(project.tags, (tag) => html`<li>${tag}</li>`)}</ul>
+            </div>
         </div>
         `)}
         </section>

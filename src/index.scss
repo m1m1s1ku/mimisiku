@@ -6,8 +6,6 @@
   --mimisiku-font-primary: "Kotori Rose", -apple-system, BlinkMacSystemFont,
     “Segoe UI”, Roboto, Helvetica, Arial, sans-serif;
 
-  --dark-color: hsl(var(--hue), 100%, 9%);
-  --light-color: hsl(var(--hue), 95%, 98%);
   --base: hsl(var(--hue), 95%, 50%);
   --complimentary1: hsl(var(--hue-complimentary1), 95%, 50%);
   --complimentary2: hsl(var(--hue-complimentary2), 95%, 50%);
@@ -23,7 +21,7 @@
   body {
     --app-container: #1f1d2b;
     --app-container: #111827;
-    --main-color: #333;
+    --main-color: #fff;
     --secondary-color: rgba(255, 255, 255, 0.8);
     --content-section: #1f2937;
     --link-color: rgba(255, 255, 255, 0.8);
@@ -76,8 +74,8 @@ body {
   min-height: 100vh;
   padding: 2rem;
 
-  color: var(--dark-color);
-  background: var(--bg-gradient);
+  color: var(--main-color);
+  /* background: var(--bg-gradient); */
 
   font-family: var(--mimisiku-font-primary);
   justify-content: center;
@@ -114,7 +112,7 @@ body {
 
 a {
   text-decoration: none;
-  color: var(--dark-color);
+  color: var(--main-color);
 }
 
 h3, h4 { user-select: none; color: var(--main-color); }
@@ -317,6 +315,16 @@ strong {
   grid-template-columns: repeat(3, 1fr);
   gap: 36px;
   padding: 10px;
+
+  .project {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    svg {
+      height: 45px;
+    }
+  }
 }
 
 /* Not too many browser support this yet but it's good to add! */
