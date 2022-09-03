@@ -141,7 +141,7 @@ export class HomeController extends Page {
 
         <div>
           <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
-          // Blog
+          // Lab
           </a>
         </div>
 
