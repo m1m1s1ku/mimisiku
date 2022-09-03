@@ -382,6 +382,9 @@ strong {
 }
 
 @media screen and (max-width: 565px) {
+  #hero-container {
+    display: none;
+  }
   .projects {
     grid-template-columns: repeat(2, 1fr);
   }
