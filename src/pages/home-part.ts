@@ -15,15 +15,15 @@ function map(n: number, start1:number, end1:number, start2:number, end2:number) 
 const noise2D = createNoise2D();
 
 export class ColorPalette {
-  hue: number | null = null;
-  complimentaryHue1: number | null = null;
-  complimentaryHue2: number | null = null;
-  saturation: number | null = null;
-  lightness: number | null = null;
-  baseColor: string | null = null;
-  complimentaryColor1: string | null = null;
-  complimentaryColor2: string | null = null;
-  colorChoices: string[] = [];
+  private hue: number | null = null;
+  private complimentaryHue1: number | null = null;
+  private complimentaryHue2: number | null = null;
+  private saturation: number | null = null;
+  private lightness: number | null = null;
+  private baseColor: string | null = null;
+  private complimentaryColor1: string | null = null;
+  private complimentaryColor2: string | null = null;
+  private colorChoices: string[] = [];
 
   constructor() {
     this.setColors();
@@ -57,7 +57,6 @@ export class ColorPalette {
   }
 
   randomColor() {
-    // pick a random color
     return this.colorChoices[~~random(0, this.colorChoices.length)].replace(
       '#',
       '0x'
@@ -65,7 +64,6 @@ export class ColorPalette {
   }
 
   setCustomProperties() {
-    // set CSS custom properties so that the colors defined here can be used throughout the UI
     document.documentElement.style.setProperty('--hue', `${this.hue}`);
     document.documentElement.style.setProperty(
       '--hue-complimentary1',
@@ -78,16 +76,17 @@ export class ColorPalette {
   }
 }
 export class Orb {
-  bounds: { x: { min: number; max: number; }; y: { min: number; max: number; }; };
-  x: number;
-  y: number;
-  scale: number;
-  fill: number;
-  radius: number;
-  xOff: number;
-  yOff: number;
-  inc: number;
-  graphics: Graphics;
+  private bounds: { x: { min: number; max: number; }; y: { min: number; max: number; }; };
+  private x: number;
+  private y: number;
+  private scale: number;
+  private radius: number;
+  private xOff: number;
+  private yOff: number;
+  private inc: number;
+
+  public graphics: Graphics;
+  public fill: number;
 
   constructor(fill = 0x000000) {
     this.bounds = this.setBounds();
@@ -176,23 +175,19 @@ export function create(): { palette: ColorPalette, orbs: Orb[] } | null {
         backgroundAlpha: 0.3
   });
   
-  // Create colour palette
   const colorPalette = new ColorPalette();
+  app.stage.filters = [
+    new KawaseBlurFilter(30, 10, true),
+  ];
   
-  app.stage.filters = [new KawaseBlurFilter(30, 10, true)];
-  
-  // Create orbs
   const orbs: Orb[] = [];
   
   for (let i = 0; i < 10; i++) {
     const orb = new Orb(parseInt(colorPalette.randomColor(), 16));
-  
     app.stage.addChild(orb.graphics);
-  
     orbs.push(orb);
   }
   
-  // Animate!
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     app.ticker.add(() => {
       orbs.forEach((orb) => {
@@ -206,16 +201,6 @@ export function create(): { palette: ColorPalette, orbs: Orb[] } | null {
       orb.render();
     });
   }
-
-  /* const btnColors = document.querySelector('.random-background');
-  btnColors?.addEventListener('click', () => {
-      colorPalette.setColors();
-      colorPalette.setCustomProperties();
-  
-      orbs.forEach((orb) => {
-        orb.fill = parseInt(colorPalette.randomColor(), 16);
-      });
-  });*/
 
   return { 
     palette: colorPalette, 

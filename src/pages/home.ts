@@ -13,6 +13,10 @@ export class HomeController extends Page {
   private textB!: HTMLSpanElement;
 
   protected firstUpdated() {
+    this.morphText();
+  }
+
+  private morphText() {
     const elts = {
       textA: this.textA,
       textB: this.textB
@@ -49,9 +53,8 @@ export class HomeController extends Page {
       setMorph(fraction);
     }
 
-    // A lot of the magic happens here, this is what applies the blur filter to the text.
     function setMorph(fraction: number) {
-      // fraction = Math.cos(fraction * Math.PI) / -2 + .5;
+      fraction = Math.cos(fraction * Math.PI) / -2 + .5;
       
       elts.textB.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
       elts.textB.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
