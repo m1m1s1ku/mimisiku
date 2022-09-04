@@ -36,7 +36,7 @@ export class ProjectsController extends Page {
     {
         name: 'Fujin',
         slug: 'fujin',
-        description: 'Crypto / news Bot on Telegram',
+        description: 'Crypto / news Bot on Telegra.',
         repository: 'https://github.com/m1m1s1ku/fujin',
         status: 'wip',
         url: 'https://t.me/FujinCryptoBot',
@@ -45,7 +45,7 @@ export class ProjectsController extends Page {
     {
         name: 'BricksSDK',
         slug: 'bricks-sdk',
-        description: 'An SDK to access Bricks.co',
+        description: 'An SDK to access Bricks.co.',
         repository: 'https://github.com/m1m1s1ku/bricks_sdk',
         status: 'published',
         url: 'https://www.npmjs.com/package/@m1m1s1ku/monpetitplacement_sdk',
@@ -54,7 +54,7 @@ export class ProjectsController extends Page {
     {
         name: 'Persin Conseil',
         slug: 'persin',
-        description: 'IT consulting and services',
+        description: 'IT consulting and services.',
         repository: 'https://github.com/Ghostfly/persin-conseil',
         url: 'https://www.persin.fr',
         tags: [ 'Lit', 'Offline ready', 'no-js handling' ],
@@ -63,7 +63,7 @@ export class ProjectsController extends Page {
     {
         name: 'Cheno',
         slug: 'cheno',
-        description: 'Iron artist',
+        description: 'Iron artist.',
         status: 'published',
         repository: 'https://github.com/ghostfly/cheno-website',
         url: 'https://www.cheno.fr',
@@ -72,7 +72,7 @@ export class ProjectsController extends Page {
     {
         name: 'Dobrunia Design',
         slug: 'dobrunia',
-        description: 'Custom objects & interior design',
+        description: 'Custom objects & interior design.',
         status: 'published',
         repository: 'https://github.com/ghostfly/dobrunia-design',
         url: 'https://www.dobruniadesign.com',
@@ -90,7 +90,7 @@ export class ProjectsController extends Page {
     {
         name: 'Talis Protocol',
         slug: 'talis-art',
-        description: 'NFT Marketplace and much more.',
+        description: 'NFT Marketplace.',
         status: 'published',
         repository: null,
         url: 'https://talis.art',
