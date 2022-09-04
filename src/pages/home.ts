@@ -132,10 +132,10 @@ export class HomeController extends Page {
             <p>We have enabled the growth of large successful communities, deploying infrastructure at scale.</p>
             <ul>
               <li>On-Premise Private networks</li>
+              <li>Self-sovereign identities</li>
               <li>Offshore hosting</li>
               <li>Monitoring</li>
               <li>Security</li>
-              <li>Support</li>
             </ul>
             <a class="wip" href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
               Cases
