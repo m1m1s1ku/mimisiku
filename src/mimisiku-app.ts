@@ -5,6 +5,7 @@ import { customElement } from 'lit/decorators/custom-element.js';
 
 import Root from './core/strategies/Root';
 import { create } from './pages/home-part';
+import { GithubLogo } from './svg';
 
 export enum Pages {
 	root = '',
@@ -96,7 +97,7 @@ export class MimisikuApp extends Root {
 					<canvas class="background-canvas"></canvas>
 				</div>
 				<footer class="footer mimi-${this.route}">
-					&copy; Mimisiku. | ${new Date().getFullYear()} | <a href="https://github.com/m1m1s1ku">GitHub</a>
+					&copy; Mimisiku. | ${new Date().getFullYear()} <a target="_blank" href="https://github.com/m1m1s1ku">${GithubLogo}</a>
 				</footer>
 			</div>
 		</div>`;

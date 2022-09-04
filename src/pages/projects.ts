@@ -1,4 +1,4 @@
-import { html, nothing, TemplateResult } from 'lit';
+import { html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { map } from 'lit/directives/map.js';
@@ -8,7 +8,7 @@ import { Mimisiku } from '../core/mimisiku';
 
 import Page from '../core/strategies/Page';
 import { Pages } from '../mimisiku-app';
-import { MaiaLogo } from '../svg';
+import { GithubLogo, MaiaLogo } from '../svg';
 
 @customElement('ui-projects')
 export class ProjectsController extends Page {
@@ -112,7 +112,7 @@ export class ProjectsController extends Page {
             <div class="excerpt">
                 <p>${project.description}</p>
                 <!-- <p class="tags">${map(project.tags, (tag) => html`<span class="tag">${tag}</span>`)}</p> -->
-                ${when(project.repository, () => html`<a href="${project.repository}">Repository</a>`)}
+                ${when(project.repository, () => html`<a href="${project.repository}">${GithubLogo}</a>`)}
             </div>
         </div>
         `)}

@@ -228,6 +228,11 @@ footer {
     color: white;
     padding: 5px;
   }
+
+  svg {
+    height: 100%;
+    width: 14px;
+  }
 }
 
 .links {
@@ -333,7 +338,7 @@ strong {
     }
     
     svg {
-      height: 45px;
+      height: 30px;
     }
   }
 }
