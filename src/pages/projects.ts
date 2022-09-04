@@ -36,7 +36,7 @@ export class ProjectsController extends Page {
     {
         name: 'Fujin',
         slug: 'fujin',
-        description: 'Crypto / news Bot on Telegra.',
+        description: 'Crypto / news Bot on Telegram.',
         repository: 'https://github.com/m1m1s1ku/fujin',
         status: 'wip',
         url: 'https://t.me/FujinCryptoBot',
