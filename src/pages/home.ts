@@ -131,7 +131,7 @@ export class HomeController extends Page {
             <h2>Networking</h2>
             <p>We have enabled the growth of large successful communities, deploying infrastructure at scale.</p>
             <ul>
-              <li>Private networks</li>
+              <li>On-Premise Private networks</li>
               <li>Offshore hosting</li>
               <li>Monitoring</li>
               <li>Security</li>
