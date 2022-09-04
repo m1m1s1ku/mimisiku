@@ -247,7 +247,6 @@ footer {
     margin: 10px 0;
   }
   a {
-    mix-blend-mode: revert;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -297,6 +296,10 @@ strong {
   -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
+}
+
+.wip {
+  mix-blend-mode: overlay;
 }
 
 .projects {

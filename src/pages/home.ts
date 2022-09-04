@@ -137,7 +137,7 @@ export class HomeController extends Page {
               <li>Security</li>
               <li>Support</li>
             </ul>
-            <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
+            <a class="wip" href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
               Cases
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </a>
@@ -148,7 +148,7 @@ export class HomeController extends Page {
           <a href="https://status.mimisiku.network/status/mimisiku" target="_blank">
           // Network status.
           </a>
-          <a href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
+          <a class="wip" href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
           // Lab.
           </a>
           <span @click=${() => Mimisiku()?.randomColors()}>🎨</span>
