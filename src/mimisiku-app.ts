@@ -16,6 +16,7 @@ import {
 	fromEvent,
 	map,
 	mergeMap,
+	of,
 	sequenceEqual,
 	skipWhile,
 	Subscription,
@@ -125,7 +126,7 @@ export class MimisikuApp extends Root {
 			KeyA: 65,
 		};
 
-		const knownSequence = from([38, 38, 40, 40, 37, 39, 37, 39, 66, 66]);
+		const knownSequence = from([38, 38, 40, 40, 37, 39, 37, 39, 66, 65]);
 		const konami$ = fromEvent<KeyboardEvent>(document, 'keyup').pipe(
 			map((e) => table[e.code] ? table[e.code] : -1),
 			skipWhile((k) => k !== 38),
@@ -133,9 +134,7 @@ export class MimisikuApp extends Root {
 			mergeMap((x) => {
 				return from(x).pipe(sequenceEqual(knownSequence));
 			}),
-			switchMap(() => {
-				return sound$;
-			})
+			switchMap((isEqual) => isEqual ? sound$ : of(null))
 		);
 
 		this.konamiSub = konami$.subscribe();
