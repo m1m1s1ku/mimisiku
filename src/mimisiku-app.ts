@@ -14,12 +14,12 @@ import {
 	from,
 	fromEvent,
 	map,
-	merge,
 	mergeMap,
 	sequenceEqual,
 	skipWhile,
 	switchMap
 } from 'rxjs';
+import { Mimisiku } from './core/mimisiku';
 
 export enum Pages {
 	root = '',
@@ -203,7 +203,8 @@ export class MimisikuApp extends Root {
 		if(!loader) { return; }
 		
 		await new Promise(resolve => {
-			if (document.body.querySelector('mimisiku-app')) { return; }
+			if (Mimisiku()) { return; }
+
 			document.body.appendChild(this);
 
 			if (!loader.parentElement) { return; }
