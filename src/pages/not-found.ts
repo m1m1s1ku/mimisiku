@@ -62,21 +62,17 @@ export class NotFoundController extends Page {
     const nogoY2: number[] = [];
     let prevDist = mazeWidth * 2;
 
-    //tilt vars
     let lastUD = 0;
     let lastLR = 0;
     const mThreshold = 15;
     let firstMove = true;
     let allowTilt = true;
 
-    //generate sides and starting position
     genSides();
 
-    //define size
     const my = mazeHeight / step;
     const mx = mazeWidth / step;
 
-    //create full grid
     const grid: Record<string, number>[][] = [];
     for (let i = 0; i < my; i++) {
       const sg = [];
@@ -86,7 +82,6 @@ export class NotFoundController extends Page {
       grid.push(sg);
     }
 
-    //create direction arrays
     const dirs = ['u', 'd', 'l', 'r'];
     const modDir = {
       u: { y: -1, x: 0, o: 'd' },
@@ -95,11 +90,9 @@ export class NotFoundController extends Page {
       r: { y: 0, x: 1, o: 'l' }
     } as Record<string, { y: number, x: number, o: string; }>;
 
-    //generate maze
     genMaze(0, 0, 0);
     drawMaze();
 
-    //get all the barriers
     const barriers = document.getElementsByClassName('barrier') as HTMLCollectionOf<HTMLElement>;
     for (let b = 0; b < barriers.length; b++) {
       nogoX.push(barriers[b].offsetLeft);
@@ -107,7 +100,6 @@ export class NotFoundController extends Page {
       nogoY.push(barriers[b].offsetTop);
       nogoY2.push(barriers[b].offsetTop + barriers[b].clientHeight);
     }
-    //console.log(nogoX, nogoX2, nogoY, nogoY2);
 
     document.addEventListener('keydown', keys);
     listeners.document.keydown = keys as (e: Event) => void;
@@ -213,7 +205,6 @@ export class NotFoundController extends Page {
       updateEmo(true);
     }
 
-    //check if one can move horizontally
     function checkXboundry(dir: string) {
       if(!thingie) { return; }
 
@@ -240,14 +231,12 @@ export class NotFoundController extends Page {
         }
         ok.push(check);
       }
-      //check what to return
       const res = ok.every(function (e) {
         return e > 0;
       });
       return res;
     }
 
-    //check if one can move vertically
     function checkYboundry(dir: string) {
       if(!thingie) { return; }
       const x = thingie.offsetLeft;
@@ -273,21 +262,17 @@ export class NotFoundController extends Page {
         }
         ok.push(check);
       }
-      //check what to return
       const res = ok.every(function (e) {
         return e > 0;
       });
       return res;
     }
 
-    //generate sides with random entry and exit points
     function genSides() {
       if(!thingie || !home || !maze) { return; }
       const max = mazeHeight / step;
       const l1 = Math.floor(Math.random() * max) * step;
-      //let l1 = 0;
       const l2 = mazeHeight - step - l1;
-      //console.log(l1, l2);
 
       const lb1 = document.createElement('div');
       lb1.style.top = step + 'px';
@@ -355,9 +340,7 @@ export class NotFoundController extends Page {
       el.style.width = bwidth + 'px';
     }
 
-    //gen maze using Recursive Backtracking
     function genMaze(cx: number, cy: number, s: number) {
-      // shuffle unchecked directions
       const d = limShuffle(dirs, s);
 
       for (let i = 0; i < d.length; i++) {
@@ -368,13 +351,11 @@ export class NotFoundController extends Page {
         if (nx >= 0 && nx < mx && ny >= 0 && ny < my && grid[ny][nx].v === 0) {
           grid[cy][cx][d[i]] = 1;
           grid[ny][nx][modDir[d[i]].o] = 1;
-          //avoid shuffling d if d's not exhausted.. hence the i
           genMaze(nx, ny, i);
         }
       }
     }
 
-    //draw maze
     function drawMaze() {
       for (let x = 0; x < mx; x++) {
         for (let y = 0; y < my; y++) {
@@ -388,7 +369,6 @@ export class NotFoundController extends Page {
       }
     }
 
-    //draw the actual lines
     function drawLines(x: number, y: number, l: number, _r: number, _u: number, d: number) {
       const top = (y + 1) * step;
       const left = (x + 1) * step;
@@ -419,7 +399,6 @@ export class NotFoundController extends Page {
 
       for (let i = ran.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        //console.log(i, j);
         [ran[i], ran[j]] = [ran[j], ran[i]];
       }
       const comb = con.concat(ran);
@@ -465,29 +444,19 @@ export class NotFoundController extends Page {
       }, 150);
     }
 
-    //let maxl = 0;
-    // let prevl = 0;
     function updateEmo(lr: boolean) {
       if(!thingie || !emo || !home) { return; }
 
-       	//Variant: Detect distance to target using old Greeks: Phytagoras (More scientifically interesting, but somehow less funny 🙃)
        	const h = home.offsetLeft - thingie.offsetLeft;
        	const v = Math.abs(home.offsetTop - thingie.offsetTop);
        	const dist = Math.hypot(h, v);
-       	console.log(h, v, dist);
 
-       	//dist = h;
-
-       	//dynamic stuff
        	if (dist <= prevDist) {
-       		//happy
        		emo.innerHTML = '😀';
        	} else {
-      // 		//sad
        		emo.innerHTML = '🙄';
        	}
 
-      // 	//fixed values
        	if (dist === 20) {
        		emo.innerHTML = '🤗';
        	}
@@ -536,8 +505,6 @@ export class NotFoundController extends Page {
 
     function handleOrientation(e: DeviceOrientationEvent) {
       if(!e.beta || !e.gamma) { return;}
-      //up/down = beta (smaller = up)
-      //left/right = gamma (neg = left)
 
       if (firstMove) {
         lastUD = e.beta;
