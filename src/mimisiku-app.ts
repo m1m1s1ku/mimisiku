@@ -91,27 +91,17 @@ export class MimisikuApp extends Root {
 			};
 		};
 
-		this.routing = firstValueFrom(from(import('./pages')).pipe(
-			switchMap(() => {
-				return this.firstLoad(path);
-			}),
-			switchMap(() => {
-				art();
+		const assets = [
+			// @ts-expect-error meh
+			import('./assets/egg/mimisiku.opus'),
+			// @ts-expect-error meh
+			import('./assets/egg/mimisiku.ogg'),
+			// @ts-expect-error meh
+			import('./assets/egg/mimisiku.mp3'),
+		];
 
-				return konami$;
-			}),
-			switchMap(async () => {
-				const assets = [
-					// @ts-expect-error meh
-					import('./assets/egg/mimisiku.opus'),
-					// @ts-expect-error meh
-					import('./assets/egg/mimisiku.ogg'),
-					// @ts-expect-error meh
-					import('./assets/egg/mimisiku.mp3'),
-				];
-
-				const [opus, ogg, mp3] = await Promise.all(assets);
-
+		const sound$ = from(Promise.all(assets)).pipe(
+			switchMap(([opus, ogg, mp3]) => {
 				const opusSource = this.audio.querySelector<HTMLSourceElement>('source#opus');
 				const oggSource = this.audio.querySelector<HTMLSourceElement>('source#ogg');
 				const mp3Source = this.audio.querySelector<HTMLSourceElement>('source#mp3');
@@ -127,7 +117,22 @@ export class MimisikuApp extends Root {
 				}
 
 				this.audio.load();
-				return await this.audio.play();
+				return from(this.audio.play());
+			})
+		);
+
+		const pages$ = from(import('./pages'));
+
+		this.routing = firstValueFrom(pages$.pipe(
+			switchMap(() => {
+				return this.firstLoad(path);
+			}),
+			switchMap(() => {
+				art();
+				return konami$;
+			}),
+			switchMap(() => {
+				return sound$;
 			})
 		));
 	}
