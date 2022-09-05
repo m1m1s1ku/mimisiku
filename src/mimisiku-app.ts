@@ -189,7 +189,7 @@ export class MimisikuApp extends Root {
 		return html`
 		<div class="app-header">
 			<div class="app-header-left">
-				<p class="app-name text-gradient"><a href="home" @click=${(e: Event) => this.navigateTo(e, Pages.home)}>// Mimisiku.</a></p>
+				<p class="app-name"><a href="home" @click=${(e: Event) => this.navigateTo(e, Pages.home)}>// Mimisiku.</a></p>
 			</div>
 		</div>`;
 	}
