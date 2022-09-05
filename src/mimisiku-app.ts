@@ -173,10 +173,10 @@ export class MimisikuApp extends Root {
 	}
 
 	public async success() {
-		const wrapper = document.querySelector('.particles-wrapper');
-		if(!wrapper) {
-			return;
-		}
+		const wrapper = document.createElement('wrapper');
+		wrapper.className = 'particles-wrapper';
+
+		this.querySelector('.app-container')?.appendChild(wrapper);
 
 		for(let i = 0; i < 350; i++) {
 			const div = document.createElement('div');
@@ -189,6 +189,7 @@ export class MimisikuApp extends Root {
 		return new Promise((resolve) => {
 			setTimeout(() => {
 				wrapper.classList.remove('visible');
+				wrapper.parentElement?.removeChild(wrapper);
 				resolve(undefined);
 			}, 3000);
 		});
@@ -246,9 +247,6 @@ export class MimisikuApp extends Root {
 						<span>Mimisiku.</span>
 					</a>
 				</footer>
-
-				<div class="particles-wrapper">
-				</div>
 
 				<audio id="audio">
 					<source id="opus" src type="audio/ogg; codecs=opus"/>
