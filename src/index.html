@@ -18,7 +18,7 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="/assets/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
-    
+
     <base href="/">
 
     <noscript>JavaScript is needed to use this website.</noscript>
@@ -37,7 +37,7 @@
           app.showLoader();
 
           await Promise.all([
-            document.fonts.ready,
+            // document.fonts.ready,
             ...app.needed.map(needed => customElements.whenDefined(needed)), // Sub-components
             app.routing,    // First-load (pathname handling)
           ]);

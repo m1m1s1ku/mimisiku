@@ -434,7 +434,7 @@ strong {
 
 @font-face {
   font-family: "Kotori Rose";
-  font-display: fallback;
+  font-display: swap;
   font-style: normal;
   font-weight: 400;
   src: local("Kotori Rose"), url('./assets/kotori-regular-webfont.woff2') format("woff2");
