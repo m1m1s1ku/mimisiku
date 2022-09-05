@@ -22,6 +22,7 @@ import {
 	switchMap
 } from 'rxjs';
 import { Mimisiku } from './core/mimisiku';
+import { AchievementComponent } from './achievement';
 
 export enum Pages {
 	root = '',
@@ -108,9 +109,11 @@ export class MimisikuApp extends Root {
 				if (mp3Source) {
 					mp3Source.src = mp3.default;
 				}
+
+				this.achievement('konami');
 			
 				this.audio.load();
-				
+
 				return await Promise.all([
 					this.success(),
 					this.audio.play()
@@ -153,6 +156,12 @@ export class MimisikuApp extends Root {
 
 	public disconnectKonami() {
 		this.konamiSub.unsubscribe();
+	}
+
+	public async achievement(title: string) {
+		const achievement = new AchievementComponent();
+		achievement.title = title;
+		this.appendChild(achievement);
 	}
 
 	public async success() {
