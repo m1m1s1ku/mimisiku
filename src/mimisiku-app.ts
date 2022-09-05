@@ -250,12 +250,6 @@ export class MimisikuApp extends Root {
 						<span>Mimisiku.</span>
 					</a>
 				</footer>
-
-				<audio id="audio">
-					<source id="opus" src type="audio/ogg; codecs=opus"/>
-					<source id="ogg" src type="audio/ogg; codecs=vorbis"/>
-					<source id="mp3" src type="audio/mpeg"/>
-				</audio>
 			</div>
 		</div>`;
 	}
