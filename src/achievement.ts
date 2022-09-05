@@ -28,31 +28,11 @@ export class AchievementComponent extends LitElement {
         top: 0;
         left: 0;
         border-radius: 4px;
-        animation: achievementLoaderAnimationFrames ease 9s;
-        animation-iteration-count: 1;
         transform: scaleX(0) scaleY(0);
         transform-origin: 50% 50%;
         animation-fill-mode: forwards;
       }
-      .achievement-banner .achievement-loader:nth-of-type(1), .achievement-banner .achievement-trophy:nth-of-type(1) {
-        animation-duration: 10s;
-      }
-      .achievement-banner .achievement-loader:nth-of-type(2), .achievement-banner .achievement-trophy:nth-of-type(2) {
-        animation-delay: 0.25s;
-        animation-duration: 9.5s;
-      }
-      .achievement-banner .achievement-loader:nth-of-type(3), .achievement-banner .achievement-trophy:nth-of-type(3) {
-        animation-delay: 0.5s;
-        animation-duration: 9s;
-      }
-      .achievement-banner .achievement-loader:nth-of-type(4), .achievement-banner .achievement-trophy:nth-of-type(4) {
-        animation-delay: 0.75s;
-        animation-duration: 8.5s;
-      }
-      .achievement-banner .achievement-loader:nth-of-type(5), .achievement-banner .achievement-trophy:nth-of-type(5) {
-        animation-delay: 1s;
-        animation-duration: 8s;
-      }
+
       .achievement-banner .achievement-trophy {
         display: flex;
         align-items: center;
@@ -61,21 +41,6 @@ export class AchievementComponent extends LitElement {
         animation-delay: 1s;
         color: #fff;
         background-color: transparent !important;
-      }
-
-      @keyframes achievementLoaderAnimationFrames {
-        0% {
-          transform: scaleX(0) scaleY(0);
-        }
-        10% {
-          transform: scaleX(1) scaleY(1);
-        }
-        90% {
-          transform: scaleX(1) scaleY(1);
-        }
-        100% {
-          transform: scaleX(0) scaleY(0);
-        }
       }
 
       @keyframes xboxLogoAnimationFrames {
