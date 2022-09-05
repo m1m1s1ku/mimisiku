@@ -8,7 +8,7 @@ import { create } from './pages/home-part';
 import { GithubLogo } from './svg';
 import { query } from 'lit/decorators.js';
 
-import { bufferCount, first, firstValueFrom, from, fromEvent, map, skipWhile, switchMap, tap } from 'rxjs';
+import { bufferCount, first, firstValueFrom, from, fromEvent, map, of, skipWhile, switchMap, tap } from 'rxjs';
 
 export enum Pages {
 	root = '',
@@ -44,80 +44,82 @@ export class MimisikuApp extends Root {
 	constructor(path: string) {
 		super();
 
-		// @todo : fix darkmode toggle
-		this.routing = import('./pages').then(() => {
-			return this.firstLoad(path);
-		}).then(() => {
-			const toolbox = create();
-			if(!toolbox) { return; }
+		const table: {[key: string]: number} = {
+			ArrowUp: 38,
+			ArrowDown: 40,
+			ArrowLeft: 37,
+			ArrowRight: 39,
+			KeyB: 66,
+			KeyQ: 65,
+			KeyA: 65,
+		};
 
-			this.randomColors = () => {
-				toolbox.palette.setColors();
-				toolbox.palette.setCustomProperties();
-			
-				toolbox.orbs.forEach((orb) => {
-					orb.fill = parseInt(toolbox.palette.randomColor(), 16);
-				});
-			};
+		const konami$ = fromEvent<KeyboardEvent>(document, 'keyup').pipe(
+			tap(console.log),
+			map((e) => table[e.code] ? table[e.code] : null),
+			tap(console.log),
+			skipWhile((k) => k !== 38),
+			bufferCount(10),
+			first((ks) => {
+				return ks.length === 10 && 
+						ks[0] === 38 && ks[1] == 38 &&
+						ks[2] == 40 && ks[3] == 40 &&
+						ks[4] == 37 && ks[5] == 39 &&
+						ks[6] == 37 && ks[7] == 39 &&
+						ks[8] == 66 && ks[9] == 65;
+			})
+		);
 
-			const table: {[key: string]: number} = {
-				ArrowUp: 38,
-				ArrowDown: 40,
-				ArrowLeft: 37,
-				ArrowRight: 39,
-				KeyB: 66,
-				KeyQ: 65,
-				KeyA: 65,
-			};
-
-			const konami$ = fromEvent<KeyboardEvent>(document, 'keyup').pipe(
-				tap(console.log),
-				map((e) => table[e.code] ? table[e.code] : null),
-				tap(console.log),
-				skipWhile((k) => k !== 38),
-				bufferCount(10),
-				first((ks) => {
-					return ks.length === 10 && 
-							ks[0] === 38 && ks[1] == 38 &&
-							ks[2] == 40 && ks[3] == 40 &&
-							ks[4] == 37 && ks[5] == 39 &&
-							ks[6] == 37 && ks[7] == 39 &&
-							ks[8] == 66 && ks[9] == 65;
-				})
-			);
-
-			return firstValueFrom(konami$.pipe(
-				switchMap(async () => {
-					const assets = [
-						// @ts-expect-error meh
-						import('./assets/egg/mimisiku.opus'),
-						// @ts-expect-error meh
-						import('./assets/egg/mimisiku.ogg'),
-						// @ts-expect-error meh
-						import('./assets/egg/mimisiku.mp3'),
-					];
-
-					const [opus, ogg, mp3] = await Promise.all(assets);
-
-					const opusSource = this.audio.querySelector<HTMLSourceElement>('source#opus');
-					const oggSource = this.audio.querySelector<HTMLSourceElement>('source#ogg');
-					const mp3Source = this.audio.querySelector<HTMLSourceElement>('source#mp3');
-
-					if (opusSource) {
-						opusSource.src = opus.default;
-					}
-					if (oggSource) {
-						oggSource.src = ogg.default;
-					}
-					if (mp3Source) {
-						mp3Source.src = mp3.default;
-					}
-
-					this.audio.load();
-					await this.audio.play();
-				})
-			));
-		});
+		this.routing = firstValueFrom(from(import('./pages')).pipe(
+			switchMap(() => {
+				return this.firstLoad(path);
+			}),
+			switchMap(() => {
+				const toolbox = create();
+				if(!toolbox) { return of(undefined); }
+	
+				this.randomColors = () => {
+					toolbox.palette.setColors();
+					toolbox.palette.setCustomProperties();
+				
+					toolbox.orbs.forEach((orb) => {
+						orb.fill = parseInt(toolbox.palette.randomColor(), 16);
+					});
+				};
+	
+				return firstValueFrom(konami$.pipe(
+					switchMap(async () => {
+						const assets = [
+							// @ts-expect-error meh
+							import('./assets/egg/mimisiku.opus'),
+							// @ts-expect-error meh
+							import('./assets/egg/mimisiku.ogg'),
+							// @ts-expect-error meh
+							import('./assets/egg/mimisiku.mp3'),
+						];
+	
+						const [opus, ogg, mp3] = await Promise.all(assets);
+	
+						const opusSource = this.audio.querySelector<HTMLSourceElement>('source#opus');
+						const oggSource = this.audio.querySelector<HTMLSourceElement>('source#ogg');
+						const mp3Source = this.audio.querySelector<HTMLSourceElement>('source#mp3');
+	
+						if (opusSource) {
+							opusSource.src = opus.default;
+						}
+						if (oggSource) {
+							oggSource.src = ogg.default;
+						}
+						if (mp3Source) {
+							mp3Source.src = mp3.default;
+						}
+	
+						this.audio.load();
+						return await this.audio.play();
+					})
+				));
+			})
+		));
 	}
 
 	private async firstLoad(path: string): Promise<HTMLElement | null> {
