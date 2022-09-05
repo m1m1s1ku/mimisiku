@@ -19,6 +19,7 @@ specifiers:
   file-loader: ^6.2.0
   hsl-to-hex: ^1.0.0
   html-webpack-plugin: ^5.5.0
+  idle-detect: ^0.1.2
   lit: ^2.3.1
   pixi.js: ^6.5.2
   rxjs: ^7.5.6
@@ -27,8 +28,11 @@ specifiers:
   simplex-noise: ^4.0.0
   style-loader: ^3.3.1
   ts-loader: ^9.3.1
+  tsparticles-engine: ^2.2.4
+  tsparticles-preset-stars: ^2.2.4
   typescript: ^4.8.2
   url-loader: ^4.1.1
+  web-particles: ^2.2.4
   webpack: ^5.74.0
   webpack-cli: ^4.10.0
   webpack-dev-server: ^4.10.1
@@ -40,6 +44,7 @@ dependencies:
   debounce: 1.2.1
   file-loader: 6.2.0_webpack@5.74.0
   hsl-to-hex: 1.0.0
+  idle-detect: 0.1.2
   lit: 2.3.1
   pixi.js: 6.5.2
   rxjs: 7.5.6
@@ -47,7 +52,10 @@ dependencies:
   sass-loader: 13.0.2_sass@1.54.8+webpack@5.74.0
   simplex-noise: 4.0.0
   style-loader: 3.3.1_webpack@5.74.0
+  tsparticles-engine: 2.2.4
+  tsparticles-preset-stars: 2.2.4
   url-loader: 4.1.1_u4acmn7fe6yqgbrqzialkgh5lu
+  web-particles: 2.2.4
 
 devDependencies:
   '@tsconfig/node16': 1.0.3
@@ -2619,6 +2627,10 @@ packages:
       postcss: 8.4.16
     dev: true
 
+  /idle-detect/0.1.2:
+    resolution: {integrity: sha512-lWi+PR+zQM61V4zVRoNiiODmHcqe+Hg7Vk/YtW6E6nITsyCdP661owwVqWmJqTflpFnETA1XV6k4jQZTTVQLxA==}
+    dev: false
+
   /ieee754/1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
     dev: false
@@ -3989,6 +4001,59 @@ packages:
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
+  /tsparticles-engine/2.2.4:
+    resolution: {integrity: sha512-glpUmRJKdbtItcHqJhE05V224DsGSV283oXR9dR6aiqA92BX/2dxU/03YrvcbPTppuMo7rFsBMf4NrPV3tXEfw==}
+    requiresBuild: true
+    dev: false
+
+  /tsparticles-move-base/2.2.4:
+    resolution: {integrity: sha512-eTtwBc/4QztBly08jrsWpiVitIQi9mWCbNQqKVB7YsFjy8uujOX9TWWLT7rxsRQcmVpt6j3M/N2wgZqAOFooZw==}
+    dependencies:
+      tsparticles-engine: 2.2.4
+    dev: false
+
+  /tsparticles-preset-stars/2.2.4:
+    resolution: {integrity: sha512-WhgwEkXLIiNz1nS/O7G07GiikPVJQ3Dn9CAxXyF9T5tdhqNsJd3adUWm9GKO61w/MkcQrZUd9b3OrrqegUl8TQ==}
+    dependencies:
+      tsparticles-engine: 2.2.4
+      tsparticles-move-base: 2.2.4
+      tsparticles-shape-circle: 2.2.4
+      tsparticles-updater-color: 2.2.4
+      tsparticles-updater-opacity: 2.2.4
+      tsparticles-updater-out-modes: 2.2.4
+      tsparticles-updater-size: 2.2.4
+    dev: false
+
+  /tsparticles-shape-circle/2.2.4:
+    resolution: {integrity: sha512-l1hheEG9ZUeqYztyJc3oy/754J5M3+VFloXA2BaTquxBqZ8X2x1mfivZT3H9ODNKTTta9Wj1ZVgexQyQVZISnw==}
+    dependencies:
+      tsparticles-engine: 2.2.4
+    dev: false
+
+  /tsparticles-updater-color/2.2.4:
+    resolution: {integrity: sha512-8iwiJA0pg96M/AaZDyWzhsm+sey6u1JA/UigV4krp0ihZ/5noZGzTrg6Fm+ki/yLKDv2ovOMfxTHfUa0qutlLQ==}
+    dependencies:
+      tsparticles-engine: 2.2.4
+    dev: false
+
+  /tsparticles-updater-opacity/2.2.4:
+    resolution: {integrity: sha512-klpMCY+y85oXjUatVd7LEROEC2brVTgRULJoN8yphWchmWs/LPLfBPwSz6rA6NGerYZAcbEsHT1uMn76zvxIQQ==}
+    dependencies:
+      tsparticles-engine: 2.2.4
+    dev: false
+
+  /tsparticles-updater-out-modes/2.2.4:
+    resolution: {integrity: sha512-bZheTxw01eSpsc+ipj+e14dgR9znsQjR9FtP7MIT7yFevqu8bqdHteO7dArRlPAZvf7gqpD706/uEdGLXSGN8Q==}
+    dependencies:
+      tsparticles-engine: 2.2.4
+    dev: false
+
+  /tsparticles-updater-size/2.2.4:
+    resolution: {integrity: sha512-J0rq+Sh3+uvgkx4a5QRouPHbhOZLH4sElnPgg8fzd43/Tc8cg0Xp9BV1wDxDWY4TB5mgwwe21JJqmYzV/6hvYw==}
+    dependencies:
+      tsparticles-engine: 2.2.4
+    dev: false
+
   /tsutils/3.21.0_typescript@4.8.2:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
@@ -4106,6 +4171,12 @@ packages:
     resolution: {integrity: sha512-O84QOnr0icsbFGLS0O3bI5FswxzRr8/gHwWkDlQFskhSPryQXvrTMxjxGP4+iWYoauLoBvfDpkrOauZ+0iZpDA==}
     dependencies:
       minimalistic-assert: 1.0.1
+
+  /web-particles/2.2.4:
+    resolution: {integrity: sha512-T8aDiovk1joDrbSgiMndX0Iz/Bwh0QBxZhg2RxbKi47wU0tC1tMcts01z4fJJOdtrrnONF3+ROQZrlPlH/mdqw==}
+    dependencies:
+      tsparticles-engine: 2.2.4
+    dev: false
 
   /webpack-cli/4.10.0_6k4gs4iynuwn6fxh2o2g4kzpru:
     resolution: {integrity: sha512-NLhDfH/h4O6UOy+0LSso42xvYypClINuMNBVVzX4vX98TmTaTUxwRbXdhucbFMd2qLaCTcLq/PdYrvi8onw90w==}

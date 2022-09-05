@@ -21,6 +21,7 @@ import {
 	switchMap
 } from 'rxjs';
 import { Mimisiku } from './core/mimisiku';
+import { repeat } from 'lit/directives/repeat';
 
 export enum Pages {
 	root = '',
@@ -57,6 +58,16 @@ export class MimisikuApp extends Root {
 
 		this.reduceAnimations = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+		// const onInactive = () => {
+		//	console.info('User is inactive now');
+		// };
+
+		// const idleDetect = new IdleDetect(15 * 60, onInactive);
+		// idleDetect.start();
+		
+		// End timer, e.g. when user is logged out
+		// idleDetect.cleanupAndStop();
+
 		const art = () => {
 			const toolbox = create();
 			if(!toolbox) { return; }
@@ -81,7 +92,7 @@ export class MimisikuApp extends Root {
 		];
 
 		const sound$ = from(Promise.all(assets)).pipe(
-			switchMap(([opus, ogg, mp3]) => {
+			switchMap(async ([opus, ogg, mp3]) => {
 				const opusSource = this.audio.querySelector<HTMLSourceElement>('source#opus');
 				const oggSource = this.audio.querySelector<HTMLSourceElement>('source#ogg');
 				const mp3Source = this.audio.querySelector<HTMLSourceElement>('source#mp3');
@@ -96,8 +107,21 @@ export class MimisikuApp extends Root {
 					mp3Source.src = mp3.default;
 				}
 
+				const wrapper = document.querySelector('.particles-wrapper');
+				if(!wrapper) {
+					return;
+				}
+
+				for(let i = 0; i < 350; i++) {
+					const div = document.createElement('div');
+					div.className = 'confetti-'+i;
+					wrapper.appendChild(div);
+				}
+
+				wrapper.classList.add('visible');
+			
 				this.audio.load();
-				return from(this.audio.play());
+				return this.audio.play();
 			})
 		);
 
@@ -186,6 +210,10 @@ export class MimisikuApp extends Root {
 						<span>Mimisiku.</span>
 					</a>
 				</footer>
+
+				<div class="particles-wrapper">
+				</div>
+
 				<audio id="audio">
 					<source id="opus" src type="audio/ogg; codecs=opus"/>
 					<source id="ogg" src type="audio/ogg; codecs=vorbis"/>
