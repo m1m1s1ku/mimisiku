@@ -87,7 +87,12 @@ a {
   color: var(--main-color);
 }
 
-h3, h4 { user-select: none; color: var(--main-color); }
+h1 {
+  margin-top: 45px;
+  font-size: 1.5em;
+}
+
+h1, h2, h3, h4 { user-select: none; color: var(--main-color); }
 button, a { cursor: pointer; }
 
 .flex-link {
