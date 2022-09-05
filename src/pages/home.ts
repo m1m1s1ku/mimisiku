@@ -13,6 +13,10 @@ export class HomeController extends Page {
   private textB!: HTMLSpanElement;
 
   protected firstUpdated() {
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
     this.morphText();
   }
 
