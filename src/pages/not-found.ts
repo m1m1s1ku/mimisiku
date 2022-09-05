@@ -9,13 +9,44 @@ import { Pages } from '../mimisiku-app';
 export class NotFoundController extends Page {
   private pageTitle;
 
+  private listeners!: { 
+    [k: string]: Record<string, (e: Event) => void>;
+  };
+  private elements!: { [key: string]: HTMLElement; };
+
   constructor(title: string) {
     super();
     this.pageTitle = title;
   }
 
+  cleanup() {
+    const windowListeners = this.listeners.window;
+    const documentListeners = this.listeners.document;
+
+    for(const eventName of Object.keys(windowListeners)) {
+      window.removeEventListener(eventName, windowListeners[eventName]);
+    }
+
+    for(const eventName of Object.keys(documentListeners)) {
+      document.removeEventListener(eventName, documentListeners[eventName]);
+    }
+
+    for(const element of Object.keys(this.elements)) {
+      const boundListeners = this.listeners[element];
+      for(const eventName of Object.keys(boundListeners)) {
+        const listener = boundListeners[eventName];
+        this.elements[element].removeEventListener(eventName, listener);
+      }
+    }
+  }
+
+  disconnectedCallback(): void {
+    this.cleanup();
+    super.disconnectedCallback();
+  }
+
   protected firstUpdated(): void {
-    const listeners = {
+    this.listeners = {
       window: {},
       document: {},
       bu: {},
@@ -44,7 +75,7 @@ export class NotFoundController extends Page {
     const bl = document.getElementById('bl');
     const br = document.getElementById('br');
 
-    const elements = {
+    this.elements = {
       bu,
       bd,
       bl,
@@ -102,7 +133,7 @@ export class NotFoundController extends Page {
     }
 
     document.addEventListener('keydown', keys);
-    listeners.document.keydown = keys as (e: Event) => void;
+    this.listeners.document.keydown = keys as (e: Event) => void;
 
     function keys(e: KeyboardEvent) {
       const code = e.code;
@@ -155,10 +186,10 @@ export class NotFoundController extends Page {
       firstMove = true;
     };
 
-    listeners.bu.click = onUpClick;
-    listeners.bd.click = onDownClick;
-    listeners.bd.click = onLeftClick;
-    listeners.br.click = onRightClick;
+    this.listeners.bu.click = onUpClick;
+    this.listeners.bd.click = onDownClick;
+    this.listeners.bd.click = onLeftClick;
+    this.listeners.br.click = onRightClick;
 
     bu.addEventListener('click', onUpClick);
     bd.addEventListener('click', onDownClick);
@@ -444,7 +475,7 @@ export class NotFoundController extends Page {
       }, 150);
     }
 
-    function updateEmo(lr: boolean) {
+    const updateEmo = (lr: boolean) => {
       if(!thingie || !emo || !home) { return; }
 
        	const h = home.offsetLeft - thingie.offsetLeft;
@@ -464,24 +495,7 @@ export class NotFoundController extends Page {
        		emo.innerHTML = '🥳';
        		home.innerHTML = '';
 
-          const windowListeners = listeners.window;
-          const documentListeners = listeners.document;
 
-          for(const eventName of Object.keys(windowListeners)) {
-            window.removeEventListener(eventName, windowListeners[eventName]);
-          }
-
-          for(const eventName of Object.keys(documentListeners)) {
-            document.removeEventListener(eventName, documentListeners[eventName]);
-          }
-
-          for(const element of Object.keys(elements)) {
-            const boundListeners = listeners[element];
-            for(const eventName of Object.keys(boundListeners)) {
-              const listener = boundListeners[eventName];
-              elements[element].removeEventListener(eventName, listener);
-            }
-          }
 
            Mimisiku()?.achievement('maze')
                       .then(() => Mimisiku()?.success())
@@ -491,10 +505,10 @@ export class NotFoundController extends Page {
        	}
 
       prevDist = dist;
-    }
+    };
 
     window.addEventListener('deviceorientation', handleOrientation);
-    listeners.window.deviceorientation = handleOrientation as (e: Event) => void;
+    this.listeners.window.deviceorientation = handleOrientation as (e: Event) => void;
 
     function tiltTimer() {
       allowTilt = false;
