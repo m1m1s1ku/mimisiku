@@ -495,11 +495,8 @@ export class NotFoundController extends Page {
        		emo.innerHTML = '🥳';
        		home.innerHTML = '';
 
-
-
-           Mimisiku()?.achievement('maze')
-                      .then(() => Mimisiku()?.success())
-                      .then(() => Mimisiku()?.navigateTo(null, Pages.home));
+          Mimisiku()?.achievement('maze')
+                    .then(() => Mimisiku()?.navigateTo(null, Pages.home));
        	} else {
        		home.innerHTML = '🏠';
        	}
