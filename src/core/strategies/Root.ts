@@ -43,12 +43,12 @@ export default abstract class Root extends LitElement {
 	}
 	
 	public async load(route: string | null): Promise<HTMLElement | null> {
-		if(!this._content) {
+		// if(!this._content) {
 			// Workaround, app will start routing asap (through native onDomLoaded)
 			// enforce LitElement update to happen before loading.
-			this.connectedCallback();
-			await this.updateComplete;
-		}
+			// this.connectedCallback();
+			// await this.updateComplete;
+		// }
 
 		if(this._content && this._content.scrollTop !== 0) {
 			this._content.scrollTop = 0;
