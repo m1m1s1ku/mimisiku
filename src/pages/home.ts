@@ -1,6 +1,7 @@
 import { html, TemplateResult } from 'lit';
-import { query } from 'lit/decorators.js';
+import { query, state } from 'lit/decorators.js';
 import { customElement } from 'lit/decorators/custom-element.js';
+import { when } from 'lit/directives/when';
 import { Mimisiku } from '../core/mimisiku';
 
 import Page from '../core/strategies/Page';
@@ -11,9 +12,12 @@ export class HomeController extends Page {
   private textA!: HTMLSpanElement;
   @query('#textB')
   private textB!: HTMLSpanElement;
+  @state()
+  private reduceAnimations = false;
 
   protected firstUpdated() {
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    this.reduceAnimations = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(this.reduceAnimations) {
       return;
     }
 
@@ -155,7 +159,9 @@ export class HomeController extends Page {
           <a class="wip" href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
           // Lab.
           </a>
+          ${when(!this.reduceAnimations, () => html`
           <span @click=${() => Mimisiku()?.randomColors()}>🎨</span>
+          `)}
         </div>
 
         <div id="hero-container">
