@@ -45,7 +45,7 @@ export class MimisikuApp extends Root {
 
 	public randomColors!: () => void;
 	
-	private konamiSub: Subscription;
+	private konamiSub: Subscription | null;
 
 	public get needed(): string[] {
 		return [
@@ -110,14 +110,20 @@ export class MimisikuApp extends Root {
 					mp3Source.src = mp3.default;
 				}
 
-				this.achievement('konami');
+				if(!this.audio.paused) {
+					return;
+				}
 			
 				this.audio.load();
 
 				return await Promise.all([
-					this.success(),
+					this.achievement('konami'),
 					this.audio.play()
-				]);
+				]).then(() => {
+					console.warn('unsub');
+					this.konamiSub?.unsubscribe();
+					this.konamiSub = null;
+				});
 			})
 		);
 
@@ -155,13 +161,15 @@ export class MimisikuApp extends Root {
 	}
 
 	public disconnectKonami() {
-		this.konamiSub.unsubscribe();
+		this.konamiSub?.unsubscribe();
+		this.konamiSub = null;
 	}
 
 	public async achievement(title: string) {
 		const achievement = new AchievementComponent();
 		achievement.title = title;
 		this.appendChild(achievement);
+		return this.success();
 	}
 
 	public async success() {

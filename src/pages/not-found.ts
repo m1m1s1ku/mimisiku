@@ -14,7 +14,26 @@ export class NotFoundController extends Page {
     this.pageTitle = title;
   }
 
-  protected firstUpdated(): void {
+  connectedCallback(): void {
+    super.connectedCallback();
+
+    const listeners = {
+      window: {},
+      document: {},
+      bu: {},
+      bd: {},
+      bl: {},
+      br: {}
+    } as {
+      window: Record<string, (e: Event) => void>, 
+      document: Record<string, (e: Event) => void>,
+      [k: string]: Record<string, (e: Event) => void>,
+      bu: Record<string, (e: Event) => void>,
+      bd: Record<string, (e: Event) => void>,
+      bl: Record<string, (e: Event) => void>,
+      br: Record<string, (e: Event) => void>,
+    };
+
     Mimisiku()?.disconnectKonami();
 
     const maze = document.getElementById('maze');
@@ -26,6 +45,13 @@ export class NotFoundController extends Page {
     const bd = document.getElementById('bd');
     const bl = document.getElementById('bl');
     const br = document.getElementById('br');
+
+    const elements = {
+      bu,
+      bd,
+      bl,
+      br
+    } as {[key: string]: HTMLElement};
 
     const step = 20;
     const size = 20;
@@ -86,8 +112,9 @@ export class NotFoundController extends Page {
     //console.log(nogoX, nogoX2, nogoY, nogoY2);
 
     document.addEventListener('keydown', keys);
+    listeners.document.keydown = keys as (e: Event) => void;
 
-    function keys(e: { code: string; }) {
+    function keys(e: KeyboardEvent) {
       const code = e.code;
       switch (code) {
         //arrows
@@ -121,22 +148,32 @@ export class NotFoundController extends Page {
 
     if(!bu || !bd || !bl || !br) { return; }
 
-    bu.addEventListener('click', (e) => {
+    const onUpClick = (e: Event) => {
       up();
       firstMove = true;
-    });
-    bd.addEventListener('click', (e) => {
+    };
+    const onDownClick = (e: Event) => {
       down();
       firstMove = true;
-    });
-    bl.addEventListener('click', (e) => {
+    };
+    const onLeftClick = (e: Event) => {
       left();
       firstMove = true;
-    });
-    br.addEventListener('click', (e) => {
+    };
+    const onRightClick = (e: Event) => {
       right();
       firstMove = true;
-    });
+    };
+
+    listeners.bu.click = onUpClick;
+    listeners.bd.click = onDownClick;
+    listeners.bd.click = onLeftClick;
+    listeners.br.click = onRightClick;
+
+    bu.addEventListener('click', onUpClick);
+    bd.addEventListener('click', onDownClick);
+    bl.addEventListener('click', onLeftClick);
+    br.addEventListener('click', onRightClick);
 
     function up() {
       if(!thingie) { return; }
@@ -459,6 +496,26 @@ export class NotFoundController extends Page {
        	if (dist === 0) {
        		emo.innerHTML = '🥳';
        		home.innerHTML = '';
+
+          const windowListeners = listeners.window;
+          const documentListeners = listeners.document;
+
+          for(const eventName of Object.keys(windowListeners)) {
+            window.removeEventListener(eventName, windowListeners[eventName]);
+          }
+
+          for(const eventName of Object.keys(documentListeners)) {
+            document.removeEventListener(eventName, documentListeners[eventName]);
+          }
+
+          for(const element of Object.keys(elements)) {
+            const boundListeners = listeners[element];
+            for(const eventName of Object.keys(boundListeners)) {
+              const listener = boundListeners[eventName];
+              elements[element].removeEventListener(eventName, listener);
+            }
+          }
+
            Mimisiku()?.achievement('maze')
                       .then(() => Mimisiku()?.success())
                       .then(() => Mimisiku()?.navigateTo(null, Pages.home));
@@ -470,6 +527,7 @@ export class NotFoundController extends Page {
     }
 
     window.addEventListener('deviceorientation', handleOrientation);
+    listeners.window.deviceorientation = handleOrientation as (e: Event) => void;
 
     function tiltTimer() {
       allowTilt = false;
@@ -507,6 +565,10 @@ export class NotFoundController extends Page {
         }
       }
     }
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
   }
 
   public render(): void | TemplateResult {
