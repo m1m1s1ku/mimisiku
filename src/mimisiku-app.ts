@@ -11,6 +11,7 @@ import { GithubLogo } from './svg';
 
 import { 
 	bufferCount,
+	filter,
 	firstValueFrom,
 	from,
 	fromEvent,
@@ -134,7 +135,8 @@ export class MimisikuApp extends Root {
 			mergeMap((x) => {
 				return from(x).pipe(sequenceEqual(knownSequence));
 			}),
-			switchMap((isEqual) => isEqual ? sound$ : of(null))
+			filter((sequenceEqual) => sequenceEqual),
+			switchMap((_) => sound$)
 		);
 
 		this.konamiSub = konami$.subscribe();
