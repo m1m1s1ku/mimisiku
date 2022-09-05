@@ -11,6 +11,7 @@ import { GithubLogo } from './svg';
 
 import { 
 	bufferCount,
+	defer,
 	filter,
 	firstValueFrom,
 	from,
@@ -76,45 +77,46 @@ export class MimisikuApp extends Root {
 			};
 		};
 
-		const assets = [
-			// @ts-expect-error meh
-			import('./assets/egg/mimisiku.opus'),
-			// @ts-expect-error meh
-			import('./assets/egg/mimisiku.ogg'),
-			// @ts-expect-error meh
-			import('./assets/egg/mimisiku.mp3'),
-		];
+		const sound$ = defer(() => {
+			const assets = [
+				// @ts-expect-error meh
+				import('./assets/egg/mimisiku.opus'),
+				// @ts-expect-error meh
+				import('./assets/egg/mimisiku.ogg'),
+				// @ts-expect-error meh
+				import('./assets/egg/mimisiku.mp3'),
+			];
 
-		const sound$ = from(Promise.all(assets)).pipe(
-			switchMap(async ([opus, ogg, mp3]) => {
-				const opusSource = this.audio.querySelector<HTMLSourceElement>('source#opus');
-				const oggSource = this.audio.querySelector<HTMLSourceElement>('source#ogg');
-				const mp3Source = this.audio.querySelector<HTMLSourceElement>('source#mp3');
+			return from(Promise.all(assets)).pipe(
+				switchMap(async ([opus, ogg, mp3]) => {
+					const opusSource = this.audio.querySelector<HTMLSourceElement>('source#opus');
+					const oggSource = this.audio.querySelector<HTMLSourceElement>('source#ogg');
+					const mp3Source = this.audio.querySelector<HTMLSourceElement>('source#mp3');
 
-				if (opusSource) {
-					opusSource.src = opus.default;
-				}
-				if (oggSource) {
-					oggSource.src = ogg.default;
-				}
-				if (mp3Source) {
-					mp3Source.src = mp3.default;
-				}
+					if (opusSource) {
+						opusSource.src = opus.default;
+					}
+					if (oggSource) {
+						oggSource.src = ogg.default;
+					}
+					if (mp3Source) {
+						mp3Source.src = mp3.default;
+					}
 
-				if(!this.audio.paused) {
-					return;
-				}
-			
-				this.audio.load();
+					if(!this.audio.paused) {
+						return;
+					}
+				
+					this.audio.load();
 
-				return await Promise.all([
-					this.achievement('konami'),
-					this.audio.play()
-				]).then(() => {
-					this.disconnectKonami();
-				});
-			})
-		);
+					return await Promise.all([
+						this.achievement('konami'),
+						this.audio.play()
+					]).then(() => {
+						this.disconnectKonami();
+					});
+				}));
+		});
 
 		const table: {[key: string]: number} = {
 			ArrowUp: 38,
@@ -207,17 +209,6 @@ export class MimisikuApp extends Root {
 		}
 	}
 
-	private redirect(page: Pages, link?: HTMLElement): void {
-		const links = this.querySelectorAll('.app-sidebar a');
-		links.forEach(link => link.classList.remove('active'));
-
-		this.load(page);
-
-		if(link) {
-			link.classList.add('active');
-		}
-	}
-
 	public render(): TemplateResult {
 		return html`
 		<div class="mimisiku">
@@ -246,6 +237,17 @@ export class MimisikuApp extends Root {
 				</audio>
 			</div>
 		</div>`;
+	}
+
+	private redirect(page: Pages, link?: HTMLElement): void {
+		const links = this.querySelectorAll('.app-sidebar a');
+		links.forEach(link => link.classList.remove('active'));
+
+		this.load(page);
+
+		if(link) {
+			link.classList.add('active');
+		}
 	}
 
 	public navigateTo(e: Event | null, page: Pages): void {
