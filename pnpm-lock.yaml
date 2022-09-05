@@ -20,7 +20,7 @@ specifiers:
   html-webpack-plugin: ^5.5.0
   lit: ^2.3.1
   pixi.js: ^6.5.2
-  rxjs: ^7.5.6
+  rxjs: ^8.0.0-alpha.4
   sass: ^1.54.8
   sass-loader: ^13.0.2
   simplex-noise: ^4.0.0
@@ -39,7 +39,7 @@ dependencies:
   hsl-to-hex: 1.0.0
   lit: 2.3.1
   pixi.js: 6.5.2
-  rxjs: 7.5.6
+  rxjs: 8.0.0-alpha.4
   sass: 1.54.8
   simplex-noise: 4.0.0
 
@@ -3815,8 +3815,8 @@ packages:
       queue-microtask: 1.2.3
     dev: true
 
-  /rxjs/7.5.6:
-    resolution: {integrity: sha512-dnyv2/YsXhnm461G+R/Pe5bWP41Nm6LBXEYWI6eiFP4fiwx6WRI/CD0zbdVAudd9xwLEF2IDcKXLHit0FYjUzw==}
+  /rxjs/8.0.0-alpha.4:
+    resolution: {integrity: sha512-Uabsjq+bvPxXehjd1MIU1sHXaimJZUcM1+D3NX5XE51owh+JKTBcegLOmbf66IYx92JzW6N3pfxiovwkPi/X3w==}
     dependencies:
       tslib: 2.4.0
     dev: false
