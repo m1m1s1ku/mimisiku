@@ -34,7 +34,7 @@ export class HomeController extends Page {
             <h2>Networking</h2>
             <p>We have enabled the growth of large successful communities, deploying infrastructure at scale.</p>
             <ul>
-              <li>On-Premise Private networks</li>
+              <li>On-premise private networks</li>
               <li>Self-sovereign identities</li>
               <li>Offshore hosting</li>
               <li>Monitoring</li>

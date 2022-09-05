@@ -166,7 +166,7 @@ export class Orb {
   }
 }
 
-export function create(): { palette: ColorPalette, orbs: Orb[] } | null {
+export function create(): { app: Application, palette: ColorPalette, orbs: Orb[] } | null {
   const canvas = document.querySelector<HTMLCanvasElement>('canvas.background-canvas');
   if(!canvas) { return null; }
 
@@ -207,7 +207,8 @@ export function create(): { palette: ColorPalette, orbs: Orb[] } | null {
     app.stop();
   }
 
-  return { 
+  return {
+    app,
     palette: colorPalette, 
     orbs 
   };
