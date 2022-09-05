@@ -104,7 +104,7 @@ export class MimisikuApp extends Root {
 
 		this.konamiSub = konami$.subscribe();
 
-		const pages$ = from(import(/* webpackChunkName: "pages" */ './pages'));
+		const pages$ = defer(() => from(import(/* webpackChunkName: "pages" */ './pages')));
 
 		this.routing = firstValueFrom(pages$.pipe(
 			switchMap(async () => this.firstLoad(path)),
