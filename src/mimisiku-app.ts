@@ -9,15 +9,14 @@ import { GithubLogo } from './svg';
 import { query } from 'lit/decorators.js';
 
 import { 
-	bufferCount, 
-	first, 
-	firstValueFrom, 
-	from, 
-	fromEvent, 
-	map, 
-	of, 
-	skipWhile, 
-	switchMap 
+	bufferCount,
+	first,
+	firstValueFrom,
+	from,
+	fromEvent,
+	map,
+	skipWhile,
+	switchMap
 } from 'rxjs';
 
 export enum Pages {
@@ -78,54 +77,57 @@ export class MimisikuApp extends Root {
 			})
 		);
 
+		const art = () => {
+			const toolbox = create();
+			if(!toolbox) { return; }
+
+			this.randomColors = () => {
+				toolbox.palette.setColors();
+				toolbox.palette.setCustomProperties();
+			
+				toolbox.orbs.forEach((orb) => {
+					orb.fill = parseInt(toolbox.palette.randomColor(), 16);
+				});
+			};
+		};
+
 		this.routing = firstValueFrom(from(import('./pages')).pipe(
 			switchMap(() => {
 				return this.firstLoad(path);
 			}),
 			switchMap(() => {
-				const toolbox = create();
-				if(!toolbox) { return of(undefined); }
-	
-				this.randomColors = () => {
-					toolbox.palette.setColors();
-					toolbox.palette.setCustomProperties();
-				
-					toolbox.orbs.forEach((orb) => {
-						orb.fill = parseInt(toolbox.palette.randomColor(), 16);
-					});
-				};
-	
-				return firstValueFrom(konami$.pipe(
-					switchMap(async () => {
-						const assets = [
-							// @ts-expect-error meh
-							import('./assets/egg/mimisiku.opus'),
-							// @ts-expect-error meh
-							import('./assets/egg/mimisiku.ogg'),
-							// @ts-expect-error meh
-							import('./assets/egg/mimisiku.mp3'),
-						];
-	
-						const [opus, ogg, mp3] = await Promise.all(assets);
-	
-						const opusSource = this.audio.querySelector<HTMLSourceElement>('source#opus');
-						const oggSource = this.audio.querySelector<HTMLSourceElement>('source#ogg');
-						const mp3Source = this.audio.querySelector<HTMLSourceElement>('source#mp3');
-	
-						if (opusSource) {
-							opusSource.src = opus.default;
-						}
-						if (oggSource) {
-							oggSource.src = ogg.default;
-						}
-						if (mp3Source) {
-							mp3Source.src = mp3.default;
-						}
-	
-						this.audio.load();
-						return await this.audio.play();
-					})
-				));
+				art();
+
+				return firstValueFrom(konami$);
+			}),
+			switchMap(async () => {
+				const assets = [
+					// @ts-expect-error meh
+					import('./assets/egg/mimisiku.opus'),
+					// @ts-expect-error meh
+					import('./assets/egg/mimisiku.ogg'),
+					// @ts-expect-error meh
+					import('./assets/egg/mimisiku.mp3'),
+				];
+
+				const [opus, ogg, mp3] = await Promise.all(assets);
+
+				const opusSource = this.audio.querySelector<HTMLSourceElement>('source#opus');
+				const oggSource = this.audio.querySelector<HTMLSourceElement>('source#ogg');
+				const mp3Source = this.audio.querySelector<HTMLSourceElement>('source#mp3');
+
+				if (opusSource) {
+					opusSource.src = opus.default;
+				}
+				if (oggSource) {
+					oggSource.src = ogg.default;
+				}
+				if (mp3Source) {
+					mp3Source.src = mp3.default;
+				}
+
+				this.audio.load();
+				return await this.audio.play();
 			})
 		));
 	}
