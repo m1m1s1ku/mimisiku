@@ -85,6 +85,12 @@ body {
 a {
   text-decoration: none;
   color: var(--main-color);
+  opacity: .8;
+  transition: opacity .3s;
+
+  &:not(.wip):hover {
+    opacity: 1;
+  }
 }
 
 h1 {
