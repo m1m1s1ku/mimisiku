@@ -10,11 +10,12 @@ import { query } from 'lit/decorators.js';
 
 import { 
 	bufferCount,
-	first,
 	firstValueFrom,
 	from,
 	fromEvent,
 	map,
+	mergeMap,
+	sequenceEqual,
 	skipWhile,
 	switchMap
 } from 'rxjs';
@@ -63,18 +64,15 @@ export class MimisikuApp extends Root {
 			KeyA: 65,
 		};
 
+		const knownSequence = from([38, 38, 40, 40, 37, 39, 37, 39, 66, 66]);
+
 		const konami$ = fromEvent<KeyboardEvent>(document, 'keyup').pipe(
-			map((e) => table[e.code] ? table[e.code] : null),
+			map((e) => table[e.code] ? table[e.code] : -1),
 			skipWhile((k) => k !== 38),
-			bufferCount(10),
-			first((ks) => {
-				return ks.length === 10 && 
-						ks[0] === 38 && ks[1] == 38 &&
-						ks[2] == 40 && ks[3] == 40 &&
-						ks[4] == 37 && ks[5] == 39 &&
-						ks[6] == 37 && ks[7] == 39 &&
-						ks[8] == 66 && ks[9] == 65;
-			})
+			bufferCount(10, 1),
+			mergeMap((x) => {
+				return from(x).pipe(sequenceEqual(knownSequence));
+			}),
 		);
 
 		const art = () => {
