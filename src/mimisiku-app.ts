@@ -67,10 +67,13 @@ export class MimisikuApp extends Root {
 				ArrowRight: 39,
 				KeyB: 66,
 				KeyQ: 65,
+				KeyA: 65,
 			};
 
 			const konami$ = fromEvent<KeyboardEvent>(document, 'keyup').pipe(
+				tap(console.log),
 				map((e) => table[e.code] ? table[e.code] : null),
+				tap(console.log),
 				skipWhile((k) => k !== 38),
 				bufferCount(10),
 				first((ks) => {
