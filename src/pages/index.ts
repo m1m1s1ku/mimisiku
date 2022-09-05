@@ -1,4 +1,3 @@
-import './not-found';
 import './home';
+import './not-found';
 import './projects';
-import './wip';

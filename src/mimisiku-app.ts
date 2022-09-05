@@ -18,10 +18,10 @@ import {
 	mergeMap,
 	sequenceEqual,
 	skipWhile,
+	Subscription,
 	switchMap
 } from 'rxjs';
 import { Mimisiku } from './core/mimisiku';
-import { repeat } from 'lit/directives/repeat';
 
 export enum Pages {
 	root = '',
@@ -43,6 +43,8 @@ export class MimisikuApp extends Root {
 	public routing: Promise<void>;
 
 	public randomColors!: () => void;
+	
+	private konamiSub: Subscription;
 
 	public get needed(): string[] {
 		return [
@@ -107,18 +109,7 @@ export class MimisikuApp extends Root {
 					mp3Source.src = mp3.default;
 				}
 
-				const wrapper = document.querySelector('.particles-wrapper');
-				if(!wrapper) {
-					return;
-				}
-
-				for(let i = 0; i < 350; i++) {
-					const div = document.createElement('div');
-					div.className = 'confetti-'+i;
-					wrapper.appendChild(div);
-				}
-
-				wrapper.classList.add('visible');
+				this.success();
 			
 				this.audio.load();
 				return this.audio.play();
@@ -148,7 +139,7 @@ export class MimisikuApp extends Root {
 			})
 		);
 
-		konami$.subscribe();
+		this.konamiSub = konami$.subscribe();
 
 		const pages$ = from(import('./pages'));
 
@@ -156,6 +147,29 @@ export class MimisikuApp extends Root {
 			switchMap(async () => this.firstLoad(path)),
 			map(() => art())
 		));
+	}
+
+	public disconnectKonami() {
+		this.konamiSub.unsubscribe();
+	}
+
+	public success() {
+		const wrapper = document.querySelector('.particles-wrapper');
+		if(!wrapper) {
+			return;
+		}
+
+		for(let i = 0; i < 350; i++) {
+			const div = document.createElement('div');
+			div.className = 'confetti-'+i;
+			wrapper.appendChild(div);
+		}
+
+		wrapper.classList.add('visible');
+
+		setTimeout(() => {
+			wrapper.classList.remove('visible');
+		}, 3000);
 	}
 
 	private async firstLoad(path: string): Promise<HTMLElement | null> {
