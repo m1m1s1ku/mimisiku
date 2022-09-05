@@ -1,7 +1,7 @@
 import { html, TemplateResult } from 'lit';
 import { query, state } from 'lit/decorators.js';
 import { customElement } from 'lit/decorators/custom-element.js';
-import { when } from 'lit/directives/when';
+import { when } from 'lit/directives/when.js';
 import { Mimisiku } from '../core/mimisiku';
 
 import Page from '../core/strategies/Page';
