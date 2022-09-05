@@ -201,10 +201,9 @@ export class MimisikuApp extends Root {
 	public async showTime(): Promise<void> {
 		const loader = document.body.querySelector('#loader');
 		if(!loader) { return; }
-		
-		await new Promise(resolve => {
-			if (Mimisiku()) { return; }
+		if (Mimisiku()) { return; }
 
+		await new Promise(resolve => {
 			document.body.appendChild(this);
 
 			if (!loader.parentElement) { return; }
