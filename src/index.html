@@ -7,15 +7,18 @@
     <title>Mimisiku.</title>
     <meta name="description" content="Passionately building and creating, bringing the future to the present.">
 
-    <!--
-    <link rel="apple-touch-icon" sizes="180x180" href="<%= htmlWebpackPlugin.options.pathname %>/assets/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="<%= htmlWebpackPlugin.options.pathname %>/assets/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="<%= htmlWebpackPlugin.options.pathname %>/assets/android-chrome-512x512.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.options.pathname %>/assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.options.pathname %>/assets/favicon-16x16.png">
-    <link rel="manifest" href="<%= htmlWebpackPlugin.options.pathname %>/assets/site.webmanifest">
-    <link rel="shortcut icon" href="<%= htmlWebpackPlugin.options.pathname %>/favicon.ico">
-    -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="manifest" href="/assets/site.webmanifest">
+    <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Mimisiku.">
+    <meta name="application-name" content="Mimisiku.">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/assets/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
     <base href="/">
 
     <noscript>JavaScript is needed to use this website.</noscript>
@@ -29,19 +32,24 @@
           }
         
           const app = new AppConstructor(location.pathname);
+          document.body.appendChild(app);
+
           app.showLoader();
 
           await Promise.all([
             document.fonts.ready,
             ...app.needed.map(needed => customElements.whenDefined(needed)), // Sub-components
             app.routing,    // First-load (pathname handling)
-            app.showTime(), // Append <mimisiku-app> into <body>
           ]);
+
+          app.showTime();
 
           const scriptTag = document.getElementById('boot');
           scriptTag.parentElement.removeChild(scriptTag);
         });
     </script>
   </head>
-  <body></body>
+  <body>
+    <canvas class="background-canvas"></canvas>
+  </body>
 </html>

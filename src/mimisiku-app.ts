@@ -223,7 +223,6 @@ export class MimisikuApp extends Root {
 				${this.appHeader}
 				<div class="app-content">
 					<div class="content-section" id="content"></div>
-					<canvas class="background-canvas"></canvas>
 				</div>
 				<footer class="footer mimi-${this.route}">
 					${when(this.reduceAnimations === false, () => html`
@@ -262,22 +261,16 @@ export class MimisikuApp extends Root {
 	}
 
 	public showLoader(): void {
-		render(html`<div id="loader" class="loader"><div class="handler-content"><div id="spinner" class="spinner large">...</div></div></div>`, document.body, { host: this });
+		render(html`<div id="loader" class="loader"><div class="handler-content"><div id="spinner" class="spinner large"></div></div></div>`, document.body, { host: this });
 	}
 
-	public async showTime(): Promise<void> {
+	public showTime(): void {
 		const loader = document.body.querySelector('#loader');
 		if(!loader) { return; }
-		if (Mimisiku()) { return; }
 
-		await new Promise(resolve => {
-			document.body.appendChild(this);
+		if (!loader.parentElement) { return; }
 
-			if (!loader.parentElement) { return; }
-
-			loader.parentElement.removeChild(loader);
-			resolve(undefined);
-		});
+		loader.parentElement.removeChild(loader);
 	}
 }
 

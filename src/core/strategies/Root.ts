@@ -41,23 +41,8 @@ export default abstract class Root extends LitElement {
 		if(window.matchMedia(this._queries.DARK).matches){ document.documentElement.classList.add('night'); }
 		if(window.matchMedia(this._queries.LIGHT).matches){ document.documentElement.classList.add('day'); }
 	}
-
-	// @Workaround
-	// App will start routing asap (through native onDomLoaded)
-	// Enforce LitElement update to happen before loading.
-	// Test : make showTime synchronous.
-	private async _litNotReadyPatch() {
-		if(this._content) { return; }
-
-		this.connectedCallback();
-		await this.updateComplete;
-	}
 	
 	public async load(route: string | null): Promise<HTMLElement | null> {
-		if(!this._content){
-			await this._litNotReadyPatch();
-		}
-	
 		route = route ?? Pages.home;
 
 		history.pushState(null, '', route);
