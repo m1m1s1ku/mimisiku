@@ -199,25 +199,18 @@ export class MimisikuApp extends Root {
 	}
 
 	public async showTime(): Promise<void> {
-		const duration = 800;
 		const loader = document.body.querySelector('#loader');
 		if(!loader) { return; }
 		
-		const fadeOut = loader.animate({ opacity: [1, 0] }, duration);
-
 		await new Promise(resolve => {
 			if (document.body.querySelector('mimisiku-app')) { return; }
 			document.body.appendChild(this);
 
-			setTimeout(() => {
-				if (!loader.parentElement) { return; }
+			if (!loader.parentElement) { return; }
 
-				loader.parentElement.removeChild(loader);
-				resolve(undefined);
-			}, duration);
+			loader.parentElement.removeChild(loader);
+			resolve(undefined);
 		});
-
-		await fadeOut.finished;
 	}
 }
 
