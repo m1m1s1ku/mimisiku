@@ -8,7 +8,7 @@ import { Mimisiku } from '../core/mimisiku';
 
 import Page from '../core/strategies/Page';
 import { Pages } from '../mimisiku-app';
-import { GithubLogo, MaiaLogo } from '../svg';
+import { GithubLogo } from '../svg';
 
 @customElement('ui-projects')
 export class ProjectsController extends Page {
@@ -24,7 +24,6 @@ export class ProjectsController extends Page {
         tags: ['OTPAuth', 'Material'],
     },
     {
-        logo: MaiaLogo,
         name: 'Maia',
         slug: 'maia',
         description: 'Financial recipes.',
