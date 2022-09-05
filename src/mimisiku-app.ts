@@ -55,10 +55,9 @@ export class MimisikuApp extends Root {
 	constructor(path: string) {
 		super();
 
+		this.reduceAnimations = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 		const art = () => {
-			this.reduceAnimations = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-			if(this.reduceAnimations) { return; }
-			
 			const toolbox = create();
 			if(!toolbox) { return; }
 
