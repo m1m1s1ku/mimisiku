@@ -104,7 +104,7 @@ export class MimisikuApp extends Root {
 
 		this.konamiSub = konami$.subscribe();
 
-		const pages$ = from(import('./pages'));
+		const pages$ = from(import(/* webpackChunkName: "pages" */ './pages'));
 
 		this.routing = firstValueFrom(pages$.pipe(
 			switchMap(async () => this.firstLoad(path)),
@@ -237,11 +237,11 @@ export class MimisikuApp extends Root {
 		return defer(() => {
 			const assets = [
 				// @ts-expect-error meh
-				import('./assets/egg/mimisiku.opus'),
+				import(/* webpackChunkName: "music-opus" */'./assets/egg/mimisiku.opus'),
 				// @ts-expect-error meh
-				import('./assets/egg/mimisiku.ogg'),
+				import(/* webpackChunkName: "music-ogg" */'./assets/egg/mimisiku.ogg'),
 				// @ts-expect-error meh
-				import('./assets/egg/mimisiku.mp3'),
+				import(/* webpackChunkName: "music-mp3" */'./assets/egg/mimisiku.mp3'),
 			];
 
 			return from(Promise.all(assets)).pipe(
