@@ -98,7 +98,7 @@ export class MimisikuApp extends Root {
 			switchMap(() => {
 				art();
 
-				return firstValueFrom(konami$);
+				return konami$;
 			}),
 			switchMap(async () => {
 				const assets = [
