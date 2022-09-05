@@ -219,14 +219,14 @@ footer {
   align-items: center;
   justify-content: flex-end;
   color: white;
+  user-select: none;
 
-  &.mimi-home {
-    display: none;
-  }
+  span { cursor: pointer; }
 
   a {
     color: white;
     padding: 5px;
+    cursor: pointer;
   }
 
   svg {

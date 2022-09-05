@@ -2,11 +2,12 @@ import './index.scss';
 
 import { html, TemplateResult, render } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
+import { query, state } from 'lit/decorators.js';
+import { when } from 'lit/directives/when.js';
 
 import Root from './core/strategies/Root';
 import { create } from './pages/home-part';
 import { GithubLogo } from './svg';
-import { query } from 'lit/decorators.js';
 
 import { 
 	bufferCount,
@@ -32,6 +33,9 @@ export enum Pages {
 export class MimisikuApp extends Root {
 	public static readonly is: string = 'mimisiku-app';
 
+	@state()
+	private reduceAnimations = false;
+
 	@query('#audio')
 	private audio!: HTMLAudioElement;
 
@@ -52,6 +56,9 @@ export class MimisikuApp extends Root {
 		super();
 
 		const art = () => {
+			this.reduceAnimations = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if(this.reduceAnimations) { return; }
+			
 			const toolbox = create();
 			if(!toolbox) { return; }
 
@@ -169,7 +176,16 @@ export class MimisikuApp extends Root {
 					<canvas class="background-canvas"></canvas>
 				</div>
 				<footer class="footer mimi-${this.route}">
-					&copy; Mimisiku. | ${new Date().getFullYear()} <a target="_blank" href="https://github.com/m1m1s1ku">${GithubLogo}</a>
+					${when(!this.reduceAnimations, () => html`
+					<span @click=${() => Mimisiku()?.randomColors()}>🎨</span>
+					`)}
+					<a href="https://status.mimisiku.network/status/mimisiku" target="_blank">
+					Status.
+					</a>
+					<a target="_blank" href="https://github.com/m1m1s1ku">
+						${GithubLogo}
+						<span>Mimisiku.</span>
+					</a>
 				</footer>
 				<audio id="audio">
 					<source id="opus" src type="audio/ogg; codecs=opus"/>

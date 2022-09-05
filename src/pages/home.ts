@@ -1,117 +1,12 @@
 import { html, TemplateResult } from 'lit';
-import { query, state } from 'lit/decorators.js';
 import { customElement } from 'lit/decorators/custom-element.js';
-import { when } from 'lit/directives/when.js';
 import { Mimisiku } from '../core/mimisiku';
 
 import Page from '../core/strategies/Page';
 import { Pages } from '../mimisiku-app';
 @customElement('ui-home')
 export class HomeController extends Page {
-  @query('#textA')
-  private textA!: HTMLSpanElement;
-  @query('#textB')
-  private textB!: HTMLSpanElement;
-  @state()
-  private reduceAnimations = false;
-
-  protected firstUpdated() {
-    this.reduceAnimations = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(this.reduceAnimations) {
-      return;
-    }
-
-    this.morphText();
-  }
-
-  private morphText() {
-    const elts = {
-      textA: this.textA,
-      textB: this.textB
-    };
-
-    const texts = [
-      'Authenticity',
-      'Secrecy',
-      'Integrity',
-    ];
-
-    const morphTime = 3;
-    const cooldownTime = 0.5;
-
-    let textIndex = texts.length - 1;
-    let time = new Date();
-    let morph = 0;
-    let cooldown = cooldownTime;
-
-    elts.textA.textContent = texts[textIndex % texts.length];
-    elts.textA.textContent = texts[(textIndex + 1) % texts.length];
-
-    function doMorph() {
-      morph -= cooldown;
-      cooldown = 0;
-      
-      let fraction = morph / morphTime;
-      
-      if (fraction > 1) {
-        cooldown = cooldownTime;
-        fraction = 1;
-      }
-      
-      setMorph(fraction);
-    }
-
-    function setMorph(fraction: number) {
-      fraction = Math.cos(fraction * Math.PI) / -2 + .5;
-      
-      elts.textB.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
-      elts.textB.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-      
-      fraction = 1 - fraction;
-      elts.textA.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
-      elts.textA.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-      
-      elts.textA.textContent = texts[textIndex % texts.length];
-      elts.textB.textContent = texts[(textIndex + 1) % texts.length];
-    }
-
-    function doCooldown() {
-      morph = 0;
-      
-      elts.textB.style.filter = '';
-      elts.textB.style.opacity = '100%';
-      
-      elts.textA.style.filter = '';
-      elts.textA.style.opacity = '0%';
-    }
-
-    function animate() {
-      requestAnimationFrame(animate);
-      
-      const newTime = new Date();
-      const shouldIncrementIndex = cooldown > 0;
-      // @ts-expect-error wtf
-      const dt = (newTime - time) / 1000;
-      time = newTime;
-      
-      cooldown -= dt;
-      
-      if (cooldown <= 0) {
-        if (shouldIncrementIndex) {
-          textIndex++;
-        }
-        
-        doMorph();
-      } else {
-        doCooldown();
-      }
-    }
-
-    animate();
-  }
-
   public render(): void | TemplateResult {
-    
     return html`
       <div id="page" class="page home" role="main">
         <section class="hero">
@@ -153,20 +48,9 @@ export class HomeController extends Page {
         </section>
 
         <div class="links">
-          <a href="https://status.mimisiku.network/status/mimisiku" target="_blank">
-          // Network status.
-          </a>
           <a class="wip" href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
           // Lab.
           </a>
-          ${when(!this.reduceAnimations, () => html`
-          <span @click=${() => Mimisiku()?.randomColors()}>🎨</span>
-          `)}
-        </div>
-
-        <div id="hero-container">
-          <span id="textA"></span>
-          <span id="textB"></span>
         </div>
 
         <svg id="filters">
