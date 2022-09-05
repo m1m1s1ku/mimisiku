@@ -1,6 +1,6 @@
 import { LitElement } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { load, bootstrap } from '../mimisiku';
+import { load } from '../mimisiku';
 
 /**
  * Abtract <*-app> component strategy
@@ -31,16 +31,10 @@ export default abstract class Root extends LitElement {
 	// Global loader control
 	// Needed for "progressive" app load
 	public abstract get needed(): string[];
-	// Async components
-	public abstract get loadables(): string[];
 
 	// Render in <app> light-dom
 	protected createRenderRoot(): this { return this; }
 	
-	public get bootstrap(): Promise<unknown[]> {
-		return bootstrap(this.loadables, this);
-	}
-
 	public connectedCallback(): void {
 		super.connectedCallback();
 

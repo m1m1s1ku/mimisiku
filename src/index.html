@@ -34,7 +34,6 @@
           await Promise.all([
             document.fonts.ready,
             ...app.needed.map(needed => customElements.whenDefined(needed)), // Sub-components
-            app.bootstrap,  // Load components promises
             app.routing,    // First-load (pathname handling)
             app.showTime(), // Append <mimisiku-app> into <body>
           ]);

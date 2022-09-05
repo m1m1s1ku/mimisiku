@@ -38,10 +38,6 @@ export class MimisikuApp extends Root {
 
 	public randomColors!: () => void;
 
-	public get loadables(): string[] {
-		return [];
-	}
-
 	public get needed(): string[] {
 		return [
 			'ui-not-found',
