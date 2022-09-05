@@ -2,8 +2,14 @@ import { Application, Graphics, utils } from 'pixi.js';
 import { KawaseBlurFilter } from '@pixi/filter-kawase-blur';
 import { createNoise2D } from 'simplex-noise';
 import hsl from 'hsl-to-hex';
-import debounce from 'debounce';
+
 import { Mimisiku } from '../core/mimisiku';
+
+import { 
+  debounceTime, 
+  fromEvent, 
+  tap 
+} from 'rxjs';
 
 function random(min: number, max: number) {
   return Math.random() * (max - min) + min;
@@ -105,12 +111,12 @@ export class Orb {
     this.graphics = new Graphics();
     this.graphics.alpha = 0.825;
 
-    window.addEventListener(
-      'resize',
-      debounce(() => {
+    fromEvent(window, 'resize').pipe(
+      debounceTime(250),
+      tap(() => {
         this.bounds = this.setBounds();
-      }, 250)
-    );
+      })
+    ).subscribe();
   }
 
   setBounds() {
