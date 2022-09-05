@@ -202,6 +202,8 @@ export function create(): { palette: ColorPalette, orbs: Orb[] } | null {
       orb.update();
       orb.render();
     });
+    app.render();
+    app.stop();
   }
 
   return { 
