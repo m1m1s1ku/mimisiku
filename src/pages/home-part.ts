@@ -3,6 +3,7 @@ import { KawaseBlurFilter } from '@pixi/filter-kawase-blur';
 import { createNoise2D } from 'simplex-noise';
 import hsl from 'hsl-to-hex';
 import debounce from 'debounce';
+import { Mimisiku } from '../core/mimisiku';
 
 function random(min: number, max: number) {
   return Math.random() * (max - min) + min;
@@ -166,31 +167,31 @@ export class Orb {
 }
 
 export function create(): { palette: ColorPalette, orbs: Orb[] } | null {
-    const canvas = document.querySelector<HTMLCanvasElement>('canvas.background-canvas');
-    if(!canvas) { return null; }
+  const canvas = document.querySelector<HTMLCanvasElement>('canvas.background-canvas');
+  if(!canvas) { return null; }
 
-    utils.skipHello();
+  utils.skipHello();
 
-    const app = new Application({
-        view: canvas,
-        resizeTo: window,
-        backgroundAlpha: 0.3,
-    });
+  const app = new Application({
+      view: canvas,
+      resizeTo: window,
+      backgroundAlpha: 0.3,
+  });
+
+  const colorPalette = new ColorPalette();
+  app.stage.filters = [
+    new KawaseBlurFilter(30, 10, true),
+  ];
   
-    const colorPalette = new ColorPalette();
-    app.stage.filters = [
-      new KawaseBlurFilter(30, 10, true),
-    ];
-    
-    const orbs: Orb[] = [];
-    
-    for (let i = 0; i < 10; i++) {
-      const orb = new Orb(parseInt(colorPalette.randomColor(), 16));
-      app.stage.addChild(orb.graphics);
-      orbs.push(orb);
-    }
+  const orbs: Orb[] = [];
   
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  for (let i = 0; i < 10; i++) {
+    const orb = new Orb(parseInt(colorPalette.randomColor(), 16));
+    app.stage.addChild(orb.graphics);
+    orbs.push(orb);
+  }
+  
+  if (Mimisiku()?.reduceAnimations) {
     app.ticker.add(() => {
       orbs.forEach((orb) => {
         orb.update();

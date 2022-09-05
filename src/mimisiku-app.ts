@@ -34,7 +34,7 @@ export class MimisikuApp extends Root {
 	public static readonly is: string = 'mimisiku-app';
 
 	@state()
-	private reduceAnimations = false;
+	public reduceAnimations = false;
 
 	@query('#audio')
 	private audio!: HTMLAudioElement;
