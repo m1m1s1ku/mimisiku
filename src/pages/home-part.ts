@@ -1,4 +1,4 @@
-import { Application, Graphics } from 'pixi.js';
+import { Application, Graphics, utils } from 'pixi.js';
 import { KawaseBlurFilter } from '@pixi/filter-kawase-blur';
 import { createNoise2D } from 'simplex-noise';
 import hsl from 'hsl-to-hex';
@@ -169,24 +169,26 @@ export function create(): { palette: ColorPalette, orbs: Orb[] } | null {
     const canvas = document.querySelector<HTMLCanvasElement>('canvas.background-canvas');
     if(!canvas) { return null; }
 
+    utils.skipHello();
+
     const app = new Application({
         view: canvas,
         resizeTo: window,
-        backgroundAlpha: 0.3
-  });
+        backgroundAlpha: 0.3,
+    });
   
-  const colorPalette = new ColorPalette();
-  app.stage.filters = [
-    new KawaseBlurFilter(30, 10, true),
-  ];
-  
-  const orbs: Orb[] = [];
-  
-  for (let i = 0; i < 10; i++) {
-    const orb = new Orb(parseInt(colorPalette.randomColor(), 16));
-    app.stage.addChild(orb.graphics);
-    orbs.push(orb);
-  }
+    const colorPalette = new ColorPalette();
+    app.stage.filters = [
+      new KawaseBlurFilter(30, 10, true),
+    ];
+    
+    const orbs: Orb[] = [];
+    
+    for (let i = 0; i < 10; i++) {
+      const orb = new Orb(parseInt(colorPalette.randomColor(), 16));
+      app.stage.addChild(orb.graphics);
+      orbs.push(orb);
+    }
   
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     app.ticker.add(() => {
