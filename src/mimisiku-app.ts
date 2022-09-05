@@ -40,8 +40,7 @@ export class MimisikuApp extends Root {
 	@state()
 	public reduceAnimations = false;
 
-	@query('#audio')
-	private audio!: HTMLAudioElement;
+	private audio: HTMLAudioElement = new Audio();
 
 	public routing: Promise<void>;
 
@@ -88,25 +87,44 @@ export class MimisikuApp extends Root {
 			];
 
 			return from(Promise.all(assets)).pipe(
-				switchMap(async ([opus, ogg, mp3]) => {
-					const opusSource = this.audio.querySelector<HTMLSourceElement>('source#opus');
-					const oggSource = this.audio.querySelector<HTMLSourceElement>('source#ogg');
-					const mp3Source = this.audio.querySelector<HTMLSourceElement>('source#mp3');
-
-					if (opusSource) {
-						opusSource.src = opus.default;
-					}
-					if (oggSource) {
-						oggSource.src = ogg.default;
-					}
-					if (mp3Source) {
-						mp3Source.src = mp3.default;
-					}
-
+				switchMap(async (media) => {
 					if(!this.audio.paused) {
 						return;
 					}
 				
+					function createSource(type: string) {
+						const source = document.createElement('source');
+						source.id = type;
+						let src: string | null = null;
+
+						switch(type) {
+							case 'opus':
+								source.type = 'audio/ogg; codecs=opus';
+								src = media[0].default;
+								break;
+							case 'ogg':
+								source.type = 'audio/ogg; codecs=vorbis';
+								src = media[1].default;
+								break;
+							case 'mp3':
+								source.type = 'audio/mpeg';
+								src = media[2].default;
+								break;
+						}
+
+						if(src) { 
+							source.src = src;
+						}
+
+						return source;
+					}
+
+					this.audio.appendChild(createSource('opus'));
+					this.audio.appendChild(createSource('ogg'));
+					this.audio.appendChild(createSource('mp3'));
+
+					this.appendChild(this.audio);
+
 					this.audio.load();
 
 					return await Promise.all([
@@ -114,6 +132,9 @@ export class MimisikuApp extends Root {
 						this.audio.play()
 					]).then(() => {
 						this.disconnectKonami();
+						setTimeout(() => {
+							this.audio.parentElement?.removeChild(this.audio);
+						}, this.audio.duration * 1000);
 					});
 				}));
 		});
