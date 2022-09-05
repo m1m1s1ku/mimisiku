@@ -14,6 +14,7 @@ import {
 	from,
 	fromEvent,
 	map,
+	merge,
 	mergeMap,
 	sequenceEqual,
 	skipWhile,
@@ -49,27 +50,6 @@ export class MimisikuApp extends Root {
 
 	constructor(path: string) {
 		super();
-
-		const table: {[key: string]: number} = {
-			ArrowUp: 38,
-			ArrowDown: 40,
-			ArrowLeft: 37,
-			ArrowRight: 39,
-			KeyB: 66,
-			KeyQ: 65,
-			KeyA: 65,
-		};
-
-		const knownSequence = from([38, 38, 40, 40, 37, 39, 37, 39, 66, 66]);
-
-		const konami$ = fromEvent<KeyboardEvent>(document, 'keyup').pipe(
-			map((e) => table[e.code] ? table[e.code] : -1),
-			skipWhile((k) => k !== 38),
-			bufferCount(10, 1),
-			mergeMap((x) => {
-				return from(x).pipe(sequenceEqual(knownSequence));
-			}),
-		);
 
 		const art = () => {
 			const toolbox = create();
@@ -115,19 +95,36 @@ export class MimisikuApp extends Root {
 			})
 		);
 
-		const pages$ = from(import('./pages'));
+		const table: {[key: string]: number} = {
+			ArrowUp: 38,
+			ArrowDown: 40,
+			ArrowLeft: 37,
+			ArrowRight: 39,
+			KeyB: 66,
+			KeyQ: 65,
+			KeyA: 65,
+		};
 
-		this.routing = firstValueFrom(pages$.pipe(
-			switchMap(() => {
-				return this.firstLoad(path);
-			}),
-			switchMap(() => {
-				art();
-				return konami$;
+		const knownSequence = from([38, 38, 40, 40, 37, 39, 37, 39, 66, 66]);
+		const konami$ = fromEvent<KeyboardEvent>(document, 'keyup').pipe(
+			map((e) => table[e.code] ? table[e.code] : -1),
+			skipWhile((k) => k !== 38),
+			bufferCount(10, 1),
+			mergeMap((x) => {
+				return from(x).pipe(sequenceEqual(knownSequence));
 			}),
 			switchMap(() => {
 				return sound$;
 			})
+		);
+
+		konami$.subscribe();
+
+		const pages$ = from(import('./pages'));
+
+		this.routing = firstValueFrom(pages$.pipe(
+			switchMap(async () => this.firstLoad(path)),
+			map(() => art())
 		));
 	}
 
@@ -198,11 +195,11 @@ export class MimisikuApp extends Root {
 	}
 
 	public showLoader(): void {
-		render(html`<div id="loader" class="loader"><div class="handler-content"><div id="spinner" class="spinner large"></div></div></div>`, document.body, { host: this });
+		render(html`<div id="loader" class="loader"><div class="handler-content"><div id="spinner" class="spinner large">...</div></div></div>`, document.body, { host: this });
 	}
 
 	public async showTime(): Promise<void> {
-		const duration = 1200;
+		const duration = 800;
 		const loader = document.body.querySelector('#loader');
 		if(!loader) { return; }
 		
