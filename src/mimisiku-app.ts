@@ -175,7 +175,7 @@ export class MimisikuApp extends Root {
 					<canvas class="background-canvas"></canvas>
 				</div>
 				<footer class="footer mimi-${this.route}">
-					${when(!this.reduceAnimations, () => html`
+					${when(this.reduceAnimations === false, () => html`
 					<span @click=${() => Mimisiku()?.randomColors()}>🎨</span>
 					`)}
 					<a href="https://status.mimisiku.network/status/mimisiku" target="_blank">

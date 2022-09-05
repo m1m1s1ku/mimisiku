@@ -191,7 +191,7 @@ export function create(): { palette: ColorPalette, orbs: Orb[] } | null {
     orbs.push(orb);
   }
   
-  if (Mimisiku()?.reduceAnimations) {
+  if (Mimisiku()?.reduceAnimations === false) {
     app.ticker.add(() => {
       orbs.forEach((orb) => {
         orb.update();
