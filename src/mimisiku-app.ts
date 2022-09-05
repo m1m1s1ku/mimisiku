@@ -61,16 +61,6 @@ export class MimisikuApp extends Root {
 
 		this.reduceAnimations = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		// const onInactive = () => {
-		//	console.info('User is inactive now');
-		// };
-
-		// const idleDetect = new IdleDetect(15 * 60, onInactive);
-		// idleDetect.start();
-		
-		// End timer, e.g. when user is logged out
-		// idleDetect.cleanupAndStop();
-
 		const art = () => {
 			const toolbox = create();
 			if(!toolbox) { return; }

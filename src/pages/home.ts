@@ -4,6 +4,7 @@ import { Mimisiku } from '../core/mimisiku';
 
 import Page from '../core/strategies/Page';
 import { Pages } from '../mimisiku-app';
+
 @customElement('ui-home')
 export class HomeController extends Page {
   public render(): void | TemplateResult {

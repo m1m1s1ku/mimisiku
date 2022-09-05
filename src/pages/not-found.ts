@@ -7,14 +7,14 @@ import { Pages } from '../mimisiku-app';
 
 @customElement('ui-not-found')
 export class NotFoundController extends Page {
-  private pageTitle;
+  protected pageTitle: string;
 
   private listeners!: { 
     [k: string]: Record<string, (e: Event) => void>;
   };
   private elements!: { [key: string]: HTMLElement; };
 
-  constructor(title: string) {
+  constructor(title = 'Not found') {
     super();
     this.pageTitle = title;
   }

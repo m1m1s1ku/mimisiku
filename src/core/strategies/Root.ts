@@ -1,6 +1,6 @@
 import { LitElement } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { load } from '../mimisiku';
+import { Pages } from '../../mimisiku-app';
 
 /**
  * Abtract <*-app> component strategy
@@ -41,22 +41,51 @@ export default abstract class Root extends LitElement {
 		if(window.matchMedia(this._queries.DARK).matches){ document.documentElement.classList.add('night'); }
 		if(window.matchMedia(this._queries.LIGHT).matches){ document.documentElement.classList.add('day'); }
 	}
+
+	// @Workaround
+	// App will start routing asap (through native onDomLoaded)
+	// Enforce LitElement update to happen before loading.
+	// Test : make showTime synchronous.
+	private async _litNotReadyPatch() {
+		if(this._content) { return; }
+
+		this.connectedCallback();
+		await this.updateComplete;
+	}
 	
 	public async load(route: string | null): Promise<HTMLElement | null> {
-		// if(!this._content) {
-			// Workaround, app will start routing asap (through native onDomLoaded)
-			// enforce LitElement update to happen before loading.
-			// this.connectedCallback();
-			// await this.updateComplete;
-		// }
-
-		if(this._content && this._content.scrollTop !== 0) {
-			this._content.scrollTop = 0;
+		if(!this._content){
+			await this._litNotReadyPatch();
 		}
+	
+		route = route ?? Pages.home;
 
 		history.pushState(null, '', route);
 		this.route = route;
-
-		return load(route, this._content);
+	
+		const defaultTitle = 'Mimisiku.';
+		const componentName = 'ui-' + route;
+	
+		const hasComponent = customElements.get(componentName);
+		const Component = hasComponent ?? customElements.get('ui-not-found');
+	
+		let loaded: HTMLElement | null = null;
+		if(Component) {
+			loaded = new Component();
+		}
+	
+		document.title = defaultTitle;
+	
+		window.scrollTo(0,0);
+	
+		if(!loaded){ return null; }
+	
+		while (this._content.lastChild) {
+			this._content.removeChild(this._content.lastChild);
+		}
+	
+		this._content.appendChild(loaded);
+	
+		return loaded;
 	}
 }
