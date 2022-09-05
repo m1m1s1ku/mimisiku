@@ -108,11 +108,13 @@ export class MimisikuApp extends Root {
 				if (mp3Source) {
 					mp3Source.src = mp3.default;
 				}
-
-				this.success();
 			
 				this.audio.load();
-				return this.audio.play();
+				
+				return await Promise.all([
+					this.success(),
+					this.audio.play()
+				]);
 			})
 		);
 
@@ -153,7 +155,7 @@ export class MimisikuApp extends Root {
 		this.konamiSub.unsubscribe();
 	}
 
-	public success() {
+	public async success() {
 		const wrapper = document.querySelector('.particles-wrapper');
 		if(!wrapper) {
 			return;
@@ -167,9 +169,12 @@ export class MimisikuApp extends Root {
 
 		wrapper.classList.add('visible');
 
-		setTimeout(() => {
-			wrapper.classList.remove('visible');
-		}, 3000);
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				wrapper.classList.remove('visible');
+				resolve(undefined);
+			}, 3000);
+		});
 	}
 
 	private async firstLoad(path: string): Promise<HTMLElement | null> {
@@ -237,8 +242,8 @@ export class MimisikuApp extends Root {
 		</div>`;
 	}
 
-	public navigateTo(e: Event, page: Pages): void {
-		e.preventDefault();
+	public navigateTo(e: Event | null, page: Pages): void {
+		e?.preventDefault();
 		this.redirect(page);
 	}
 

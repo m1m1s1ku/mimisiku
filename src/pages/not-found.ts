@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import { Mimisiku } from '../core/mimisiku';
 
 import Page from '../core/strategies/Page';
+import { Pages } from '../mimisiku-app';
 
 @customElement('ui-not-found')
 export class NotFoundController extends Page {
@@ -458,7 +459,7 @@ export class NotFoundController extends Page {
        	if (dist === 0) {
        		emo.innerHTML = '🥳';
        		home.innerHTML = '';
-          Mimisiku()?.success();
+          Mimisiku()?.success().then(() => Mimisiku()?.navigateTo(null, Pages.home));
        	} else {
        		home.innerHTML = '🏠';
        	}

@@ -18,7 +18,6 @@ export async function load(route: string | null, content: HTMLElement | null): P
 
     let loaded: HTMLElement | null = null;
     if(Component) {
-        console.warn(Component.name);
         loaded = new Component(Component.name === 'NotFoundController' ? route === Pages.wip ? 'Work in progress' : 'Not found' : undefined);
     }
 
