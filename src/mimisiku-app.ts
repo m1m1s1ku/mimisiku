@@ -110,9 +110,7 @@ export class MimisikuApp extends Root {
 					this.achievement('konami'),
 					this.audio.play()
 				]).then(() => {
-					console.warn('unsub');
-					this.konamiSub?.unsubscribe();
-					this.konamiSub = null;
+					this.disconnectKonami();
 				});
 			})
 		);
@@ -159,7 +157,11 @@ export class MimisikuApp extends Root {
 		const achievement = new AchievementComponent();
 		achievement.title = title;
 		this.appendChild(achievement);
-		return this.success();
+		return this.success().then(() => {
+			setTimeout(() => {
+				this.removeChild(achievement);
+			}, 300);
+		});
 	}
 
 	public async success() {
