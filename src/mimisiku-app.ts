@@ -6,8 +6,6 @@ import { state } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
 
 import Root from './core/strategies/Root';
-import { create } from './pages/home-part';
-import { GithubLogo } from './svg';
 
 import { 
 	bufferCount,
@@ -23,8 +21,12 @@ import {
 	Subscription,
 	switchMap
 } from 'rxjs';
+
 import { Mimisiku } from './core/mimisiku';
 import { AchievementComponent } from './achievement';
+
+import { create } from './pages/home-part';
+import { GithubLogo } from './svg';
 
 export enum Pages {
 	root = '',
