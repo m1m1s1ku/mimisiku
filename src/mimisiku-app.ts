@@ -17,7 +17,6 @@ import {
 	fromEvent,
 	map,
 	mergeMap,
-	of,
 	sequenceEqual,
 	skipWhile,
 	Subscription,

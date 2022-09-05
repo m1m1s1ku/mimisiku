@@ -4,6 +4,7 @@ import { Mimisiku } from '../core/mimisiku';
 
 import Page from '../core/strategies/Page';
 import { Pages } from '../mimisiku-app';
+import { Chevron } from '../svg';
 
 @customElement('ui-home')
 export class HomeController extends Page {
@@ -27,7 +28,7 @@ export class HomeController extends Page {
             </ul>
             <a href="projects" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.projects)}>
               Projects
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              ${Chevron}
             </a>
           </section>
 
@@ -43,7 +44,7 @@ export class HomeController extends Page {
             </ul>
             <a class="wip" href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
               Cases
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              ${Chevron}            
             </a>
           </section>
         </section>
