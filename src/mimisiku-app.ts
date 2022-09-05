@@ -8,7 +8,17 @@ import { create } from './pages/home-part';
 import { GithubLogo } from './svg';
 import { query } from 'lit/decorators.js';
 
-import { bufferCount, first, firstValueFrom, from, fromEvent, map, of, skipWhile, switchMap, tap } from 'rxjs';
+import { 
+	bufferCount, 
+	first, 
+	firstValueFrom, 
+	from, 
+	fromEvent, 
+	map, 
+	of, 
+	skipWhile, 
+	switchMap 
+} from 'rxjs';
 
 export enum Pages {
 	root = '',
@@ -55,9 +65,7 @@ export class MimisikuApp extends Root {
 		};
 
 		const konami$ = fromEvent<KeyboardEvent>(document, 'keyup').pipe(
-			tap(console.log),
 			map((e) => table[e.code] ? table[e.code] : null),
-			tap(console.log),
 			skipWhile((k) => k !== 38),
 			bufferCount(10),
 			first((ks) => {
