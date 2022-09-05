@@ -207,6 +207,7 @@ button, a { cursor: pointer; }
 .areas {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 30px
 }
 
 .wip a {
