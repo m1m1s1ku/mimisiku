@@ -349,6 +349,10 @@ strong {
   }
 }
 
+[route=wip], [route=not-found] {
+  footer { display: none; }
+}
+
 @media (prefers-contrast: high) {
   .background-canvas {
     display: none;

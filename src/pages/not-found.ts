@@ -14,9 +14,7 @@ export class NotFoundController extends Page {
     this.pageTitle = title;
   }
 
-  connectedCallback(): void {
-    super.connectedCallback();
-
+  protected firstUpdated(): void {
     const listeners = {
       window: {},
       document: {},
@@ -565,10 +563,6 @@ export class NotFoundController extends Page {
         }
       }
     }
-  }
-
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
   }
 
   public render(): void | TemplateResult {
