@@ -33,7 +33,8 @@ export enum Pages {
 	home = 'home',
 	wip = 'wip',
 	projects = 'projects',
-	notFound = 'not-found'
+	notFound = 'not-found',
+	contact = 'contact',
 }
 @customElement('mimisiku-app')
 export class MimisikuApp extends Root {

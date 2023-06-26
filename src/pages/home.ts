@@ -50,8 +50,8 @@ export class HomeController extends Page {
         </section>
 
         <div class="links">
-          <a class="wip" href="wip" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.wip)}>
-          // Lab.
+          <a href="contact" @click=${(e: Event) => Mimisiku()?.navigateTo(e, Pages.contact)}>
+          // Contact.
           </a>
         </div>
       </div>

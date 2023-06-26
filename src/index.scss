@@ -328,7 +328,7 @@ strong {
 
   .project {
     display: flex;
-    padding: 16px 6px;
+    padding: 28px 16px;
     background-color: rgba(0, 0, 0, 0.2);
     flex-direction: column;
     align-items: flex-start;
@@ -345,14 +345,18 @@ strong {
         justify-content: space-between;
       }
 
+      p:first-child {
+        font-size: .9em;
+      }
+
       p.tags {
         display: flex;
         flex-direction: row;
         gap: 5px;
-        font-size: .8em;
+        font-size: .7em;
       }
       .state {
-        font-size: .8em;
+        font-size: .7em;
       }
       a {
         align-self: flex-end;
