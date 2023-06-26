@@ -15,6 +15,15 @@ export class ProjectsController extends Page {
 
   private projects = [
     {
+      name: 'Thiweb',
+      slug: 'thiweb',
+      description: 'Community.',
+      repository: 'https://github.com/m1m1s1ku/thiweb-crypt-n-decrypt',
+      status: 'published',
+      url: 'https://forum.thiweb.com',
+      tags: ['PhpBB', 'Typescript', 'NodeJS', 'AWS'],
+    },
+    {
         name: 'Google Authenticator Export',
         slug: 'ga-export',
         description: 'Export every secret easily from Google Authenticator (Authy in another repo too.).',
@@ -24,31 +33,13 @@ export class ProjectsController extends Page {
         tags: ['OTPAuth', 'Material'],
     },
     {
-        name: 'Maia',
-        slug: 'maia',
-        description: 'Financial recipes.',
-        repository: 'https://github.com/m1m1s1ku/maia',
-        status: 'wip',
-        url: 'https://maia.kitchen',
-        tags: ['Lit'],
-    },
-    {
         name: 'Fujin',
         slug: 'fujin',
         description: 'Crypto / news Bot on Telegram.',
         repository: 'https://github.com/m1m1s1ku/fujin',
-        status: 'wip',
+        status: 'pause',
         url: 'https://t.me/FujinCryptoBot',
         tags: ['NodeJS', 'Telegram', 'Bot', 'OPML', 'RSS'],
-    },
-    {
-        name: 'BricksSDK',
-        slug: 'bricks-sdk',
-        description: 'An SDK to access Bricks.co.',
-        repository: 'https://github.com/m1m1s1ku/bricks_sdk',
-        status: 'published',
-        url: 'https://www.npmjs.com/package/@m1m1s1ku/monpetitplacement_sdk',
-        tags: ['NodeJS', 'Typescript', 'Zod', 'Undici'],
     },
     {
         name: 'Persin Conseil',
@@ -56,9 +47,9 @@ export class ProjectsController extends Page {
         description: 'IT consulting and services.',
         repository: 'https://github.com/Ghostfly/persin-conseil',
         url: 'https://www.persin.fr',
+        status: 'published',
         tags: [ 'Lit', 'Offline ready', 'no-js handling' ],
     },
-
     {
         name: 'Cheno',
         slug: 'cheno',
@@ -72,19 +63,10 @@ export class ProjectsController extends Page {
         name: 'Dobrunia Design',
         slug: 'dobrunia',
         description: 'Custom objects & interior design.',
-        status: 'published',
+        status: 'pause',
         repository: 'https://github.com/ghostfly/dobrunia-design',
         url: 'https://www.dobruniadesign.com',
         tags: [ 'Lit', 'GraphQL', 'Wordpress' ],
-    },
-    {
-        name: 'Thiweb',
-        slug: 'thiweb',
-        description: 'Community.',
-        repository: null,
-        status: 'published',
-        url: 'https://forum.thiweb.com',
-        tags: ['PhpBB'],
     },
     {
         name: 'Talis Protocol',
@@ -94,6 +76,15 @@ export class ProjectsController extends Page {
         repository: null,
         url: 'https://talis.art',
         tags: [ 'Next.JS', 'RxJS', 'Rust' ],
+    },
+    {
+      name: 'BricksSDK',
+      slug: 'bricks-sdk',
+      description: 'An SDK to access Bricks.co.',
+      repository: 'https://github.com/m1m1s1ku/bricks_sdk',
+      status: 'archived',
+      url: 'https://www.npmjs.com/package/@m1m1s1ku/monpetitplacement_sdk',
+      tags: ['NodeJS', 'Typescript', 'Zod', 'Undici'],
     },
   ];
 
@@ -110,8 +101,11 @@ export class ProjectsController extends Page {
             <a href=${project.url}>${project.name}</a>
             <div class="excerpt">
                 <p>${project.description}</p>
-                <!-- <p class="tags">${map(project.tags, (tag) => html`<span class="tag">${tag}</span>`)}</p> -->
-                ${when(project.repository, () => html`<a href="${project.repository}">${GithubLogo}</a>`)}
+                <p class="tags">${map(project.tags, (tag) => html`<span class="tag">${tag}</span>`)}</p>
+                <div class="extra">
+                  ${when(project.status, () => html`<span class="state">${project.status.charAt(0).toUpperCase() + project.status.substring(1, project.status.length)}</span>`)}
+                  ${when(project.repository, () => html`<a href="${project.repository}">${GithubLogo}</a>`)}
+                </div>
             </div>
         </div>
         `)}

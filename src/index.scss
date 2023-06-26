@@ -339,10 +339,20 @@ strong {
       flex-direction: column;
       width: 100%;
 
+      .extra {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
       p.tags {
         display: flex;
         flex-direction: row;
         gap: 5px;
+        font-size: .8em;
+      }
+      .state {
+        font-size: .8em;
       }
       a {
         align-self: flex-end;
