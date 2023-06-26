@@ -21,7 +21,16 @@ export class ProjectsController extends Page {
       repository: 'https://github.com/m1m1s1ku/thiweb-crypt-n-decrypt',
       status: 'published',
       url: 'https://forum.thiweb.com',
-      tags: ['PhpBB', 'Typescript', 'NodeJS', 'AWS'],
+      tags: ['PhpBB', 'Typescript', 'NodeJS', 'AWS', 'WebExtension'],
+    },
+    {
+      name: 'Backup tool',
+      slug: 'backup-tool',
+      description: 'Multi-site, simple, backup in NodeJS.',
+      repository: 'https://github.com/m1m1s1ku/backup-tool',
+      status: 'published',
+      url: 'https://github.com/m1m1s1ku/backup-tool',
+      tags: ['Gzip', 'MySQL', 'MySQLDump', 'SFTP', 'FTP(ES)'],
     },
     {
         name: 'Google Authenticator Export',
@@ -68,7 +77,7 @@ export class ProjectsController extends Page {
         url: 'https://www.dobruniadesign.com',
         tags: [ 'Lit', 'GraphQL', 'Wordpress' ],
     },
-    {
+    /*{
         name: 'Talis Protocol',
         slug: 'talis-art',
         description: 'NFT Marketplace.',
@@ -76,7 +85,7 @@ export class ProjectsController extends Page {
         repository: null,
         url: 'https://talis.art',
         tags: [ 'Next.JS', 'RxJS', 'Rust' ],
-    },
+    },*/
     {
       name: 'BricksSDK',
       slug: 'bricks-sdk',
@@ -85,6 +94,15 @@ export class ProjectsController extends Page {
       status: 'archived',
       url: 'https://www.npmjs.com/package/@m1m1s1ku/monpetitplacement_sdk',
       tags: ['NodeJS', 'Typescript', 'Zod', 'Undici'],
+    },
+    {
+      name: 'PDFFormsFiller',
+      slug: 'pdf-forms-filler',
+      description: 'Fill Acrobat forms easily using pure PHP ! 💪',
+      repository: 'https://github.com/m1m1s1ku/PDFFormsFiller',
+      status: 'archived',
+      url: 'https://github.com/m1m1s1ku/PDFFormsFiller',
+      tags: ['PHP', 'FPDF/FPDI', 'PHPUnit'],
     },
   ];
 
