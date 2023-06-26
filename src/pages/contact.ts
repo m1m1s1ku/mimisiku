@@ -14,7 +14,9 @@ export class ContactController extends Page {
         </section>
 
         <section class="areas">
-          
+          <p>
+            <a href="mailto:hello@mimisiku.dev">hello@mimisiku.dev</a>
+          </p>
         </section>
       </div>
     `;

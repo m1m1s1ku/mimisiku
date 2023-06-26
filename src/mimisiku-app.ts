@@ -167,6 +167,8 @@ export class MimisikuApp extends Root {
 				return await this.load(Pages.wip);
 			case Pages.projects:
 				return await this.load(Pages.projects);
+			case Pages.contact:
+				return await this.load(Pages.contact);
 			default:
 				return await this.load(Pages.notFound);
 		}
