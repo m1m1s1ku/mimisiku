@@ -15,7 +15,8 @@ export class ContactController extends Page {
 
         <section class="areas">
           <p>
-            <a href="mailto:hello@mimisiku.dev">hello@mimisiku.dev</a>
+            <a href="mailto:hello@mimisiku.dev">hello@mimisiku.dev</a><br /><br />
+            BTC Addr : bc1q6q8jrk2554zaj64xv2h6hyffgu9a6dwgugvtm7
           </p>
         </section>
       </div>
