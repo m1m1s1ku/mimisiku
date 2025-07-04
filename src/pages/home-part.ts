@@ -1,5 +1,5 @@
-import { Application, Graphics, settings } from 'pixi.js';
-import { KawaseBlurFilter } from '@pixi/filter-kawase-blur';
+import { Application, Graphics } from 'pixi.js';
+import { KawaseBlurFilter } from 'pixi-filters';
 import { createNoise2D } from 'simplex-noise';
 import hsl from 'hsl-to-hex';
 
@@ -82,6 +82,7 @@ export class ColorPalette {
     );
   }
 }
+
 export class Orb {
   private bounds: { x: { min: number; max: number; }; y: { min: number; max: number; }; };
   private x: number;
@@ -165,30 +166,29 @@ export class Orb {
     this.graphics.scale.set(this.scale);
 
     this.graphics.clear();
-
-    this.graphics.beginFill(this.fill);
-    this.graphics.drawCircle(0, 0, this.radius);
-    this.graphics.endFill();
+    this.graphics.circle(0, 0, this.radius);
+    this.graphics.fill(this.fill);
   }
 }
 
-export function create(): { app: Application, palette: ColorPalette, orbs: Orb[] } | null {
+export async function create(): Promise<{ app: Application, palette: ColorPalette, orbs: Orb[] } | null> {
   const canvas = document.querySelector<HTMLCanvasElement>('canvas.background-canvas');
   if(!canvas) { return null; }
 
-  if(settings.RENDER_OPTIONS) {
-    settings.RENDER_OPTIONS.hello = false;
-  }
-
-  const app = new Application({
-      view: canvas,
-      resizeTo: window,
-      backgroundAlpha: 0.3,
+  const app = new Application();
+  await app.init({
+    canvas: canvas,
+    resizeTo: window,
+    backgroundAlpha: 0.3,
   });
 
   const colorPalette = new ColorPalette();
   app.stage.filters = [
-    new KawaseBlurFilter(30, 10, true),
+    new KawaseBlurFilter({
+      strength: 30,
+      quality: 10,
+      clamp: true
+    })
   ];
   
   const orbs: Orb[] = [];

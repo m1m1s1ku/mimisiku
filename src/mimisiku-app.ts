@@ -75,8 +75,8 @@ export class MimisikuApp extends Root {
 
 		this.reduceAnimations = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		const art = () => {
-			const toolbox = create();
+		const art = async () => {
+			const toolbox = await create();
 			if(!toolbox) { return; }
 
 			this.randomColors = () => {
@@ -109,7 +109,7 @@ export class MimisikuApp extends Root {
 
 		this.routing = firstValueFrom(pages$.pipe(
 			switchMap(async () => this.firstLoad(path)),
-			map(() => art())
+			switchMap(() => art())
 		));
 	}
 
