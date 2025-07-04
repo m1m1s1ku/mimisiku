@@ -669,3 +669,9 @@ $colors: (#d13447, #ffbf00, #263672);
   }
   
 }
+
+@media screen and (max-height: 720px) {
+  .maze-error {
+    display: none;
+  }
+}

@@ -1,4 +1,4 @@
-import { Application, Graphics, utils } from 'pixi.js';
+import { Application, Graphics, settings, utils } from 'pixi.js';
 import { KawaseBlurFilter } from '@pixi/filter-kawase-blur';
 import { createNoise2D } from 'simplex-noise';
 import hsl from 'hsl-to-hex';
@@ -176,7 +176,9 @@ export function create(): { app: Application, palette: ColorPalette, orbs: Orb[]
   const canvas = document.querySelector<HTMLCanvasElement>('canvas.background-canvas');
   if(!canvas) { return null; }
 
-  utils.skipHello();
+  if(settings.RENDER_OPTIONS) {
+    settings.RENDER_OPTIONS.hello = false;
+  }
 
   const app = new Application({
       view: canvas,
