@@ -9,7 +9,6 @@
     "url": "https://github.com/m1m1s1ku/mimisiku"
   },
   "dependencies": {
-    "@pixi/filter-kawase-blur": "^5.1.1",
     "buffer": "^6.0.3",
     "hsl-to-hex": "^1.0.0",
     "lit": "^3.3.0",
