@@ -114,7 +114,6 @@ export class MimisikuApp extends Root {
 	}
 
 	public disconnectKonami() {
-		console.warn('konami unsub');
 		this.konamiSub?.unsubscribe();
 		this.konamiSub = null;
 	}
