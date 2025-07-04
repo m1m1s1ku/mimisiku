@@ -105,7 +105,7 @@ export class MimisikuApp extends Root {
 
 		this.konamiSub = konami$.subscribe();
 
-		const pages$ = defer(() => from(import(/* webpackChunkName: "pages" */ './pages')));
+		const pages$ = defer(() => from(import(/* webpackChunkName: "pages" */ './pages/index')));
 
 		this.routing = firstValueFrom(pages$.pipe(
 			switchMap(async () => this.firstLoad(path)),
@@ -186,7 +186,7 @@ export class MimisikuApp extends Root {
 					${when(this.reduceAnimations === false, () => html`
 					<span @click=${() => Mimisiku()?.randomColors()}>🎨</span>
 					`)}
-					<a href="https://status.mimisiku.network/status/mimisiku" target="_blank">
+					<a href="https://status.mimisiku.dev/status/mimisiku" target="_blank">
 					Status.
 					</a>
 					<a target="_blank" href="https://github.com/m1m1s1ku">

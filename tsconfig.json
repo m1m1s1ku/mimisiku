@@ -1,7 +1,9 @@
 {
-    "extends": "@tsconfig/node16/tsconfig.json",
+    "extends": "@tsconfig/node22/tsconfig.json",
     "compilerOptions": {
         "lib": ["es2021", "dom"],
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "useDefineForClassFields": false,
+        "moduleResolution": "node"
     }
 }
