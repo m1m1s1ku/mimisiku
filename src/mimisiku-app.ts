@@ -224,7 +224,13 @@ export class MimisikuApp extends Root {
 	}
 
 	public showLoader(): void {
-		render(html`<div id="loader" class="loader"><div class="handler-content"><div id="spinner" class="spinner large"></div></div></div>`, document.body, { host: this });
+		render(html`<div id="loader" class="loader">
+			<div id="dot"></div>
+			<div class="step" id="s1"></div>
+			<div class="step" id="s2"></div>
+			<div class="step" id="s3"></div>
+		</div>
+	</div>`, document.body, { host: this });
 	}
 
 	public showTime(): void {
