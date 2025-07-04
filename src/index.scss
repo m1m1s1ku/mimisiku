@@ -667,11 +667,13 @@ $colors: (#d13447, #ffbf00, #263672);
     transform: scale(1);
     -webkit-appearance: none;
   }
-  
 }
 
-@media screen and (max-height: 720px) {
+@media screen and (orientation:landscape) and (pointer: coarse) {
   .maze-error {
     display: none;
+    #maze {
+      display: none;
+    }
   }
-}
+ }

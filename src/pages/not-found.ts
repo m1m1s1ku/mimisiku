@@ -495,8 +495,12 @@ export class NotFoundController extends Page {
        		emo.innerHTML = '🥳';
        		home.innerHTML = '';
 
-          Mimisiku()?.achievement('maze')
-                    .then(() => Mimisiku()?.navigateTo(null, Pages.home));
+          const isMobileLandscape = window.matchMedia('screen and (orientation:landscape) and (pointer: coarse)').matches;
+
+          if(!isMobileLandscape) {
+            Mimisiku()?.achievement('maze')
+                      .then(() => Mimisiku()?.navigateTo(null, Pages.home));
+          }
        	} else {
        		home.innerHTML = '🏠';
        	}
