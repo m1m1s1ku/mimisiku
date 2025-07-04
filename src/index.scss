@@ -442,6 +442,10 @@ strong {
     display: inline-block;
   }
 
+  .content-section {
+    padding: 0;
+  }
+
   .projects {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     .project {
