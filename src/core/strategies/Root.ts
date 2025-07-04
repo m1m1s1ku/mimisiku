@@ -38,8 +38,10 @@ export default abstract class Root extends LitElement {
 	public connectedCallback(): void {
 		super.connectedCallback();
 
-		if(window.matchMedia(this._queries.DARK).matches){ document.documentElement.classList.add('night'); }
-		if(window.matchMedia(this._queries.LIGHT).matches){ document.documentElement.classList.add('day'); }
+		const darkQuery = window.matchMedia(this._queries.DARK);
+		const lightQuery = window.matchMedia(this._queries.LIGHT);
+		if(darkQuery.matches){ document.documentElement.classList.add('night'); }
+		if(lightQuery.matches){ document.documentElement.classList.add('day'); }
 	}
 	
 	public async load(route: string | null): Promise<HTMLElement | null> {

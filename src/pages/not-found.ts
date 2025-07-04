@@ -63,7 +63,7 @@ export class NotFoundController extends Page {
       br: Record<string, (e: Event) => void>,
     };
 
-    Mimisiku()?.disconnectKonami();
+    // Mimisiku()?.disconnectKonami();
 
     const maze = document.getElementById('maze');
     const thingie = document.getElementById('thingie');
