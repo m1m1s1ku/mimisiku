@@ -441,6 +441,21 @@ strong {
   .areas {
     display: inline-block;
   }
+
+  .projects {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    .project {
+      div.excerpt {
+        .extra {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        p.tags {
+          flex-direction: column;
+        }
+      }
+    }
+  }
 }
 
 @font-face {
